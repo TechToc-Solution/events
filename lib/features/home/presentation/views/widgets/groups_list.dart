@@ -21,6 +21,14 @@ class GroupsList extends StatelessWidget {
             color: Colors.white,
             border: Border.all(color: AppColors.primaryColors, width: 2),
             borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.25),
+                offset: Offset(0, 4),
+                blurRadius: 4,
+                spreadRadius: 1,
+              ),
+            ],
           ),
           child: ListTile(
             title: Text(

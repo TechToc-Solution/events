@@ -16,9 +16,9 @@ class HomePageBody extends StatelessWidget {
           child: ListView(
             children: [
               HomeTitle(),
-              SizedBox(height: 8),
+              SizedBox(height: 12),
               CountdownTimerWidget(),
-              SizedBox(height: 8),
+              SizedBox(height: 12),
               GroupsList(data: data),
             ],
           ),

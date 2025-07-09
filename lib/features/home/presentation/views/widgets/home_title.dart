@@ -13,6 +13,14 @@ class HomeTitle extends StatelessWidget {
         border: Border.all(color: AppColors.borderColors, width: 2),
         color: AppColors.secColors,
         borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            offset: Offset(0, 4),
+            blurRadius: 6, 
+            spreadRadius: 1, 
+          ),
+        ],
       ),
 
       child: Container(
