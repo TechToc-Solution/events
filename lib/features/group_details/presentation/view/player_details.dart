@@ -60,131 +60,133 @@ class PlayerDetailsScreen extends StatelessWidget {
             horizontal: kHorizontalPadding,
             vertical: kVerticalPadding,
           ),
-          child: Center(
-            child: Card(
-              elevation: 4,
-              margin: const EdgeInsets.all(8),
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      decoration: BoxDecoration(
-                        color: AppColors.secColors,
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(16),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Card(
+                elevation: 4,
+                margin: const EdgeInsets.all(8),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        decoration: BoxDecoration(
+                          color: AppColors.secColors,
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(16),
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 85,
-                              height: 85,
-                              decoration: BoxDecoration(
-                                color: Colors.amber,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: AppColors.primaryColors,
-                                  width: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 85,
+                                height: 85,
+                                decoration: BoxDecoration(
+                                  color: Colors.amber,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: AppColors.primaryColors,
+                                    width: 2,
+                                  ),
                                 ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  player.id.toString(),
-                                  style: Styles.textStyle25.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
+                                child: Center(
+                                  child: Text(
+                                    player.id.toString(),
+                                    style: Styles.textStyle25.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
+                              const SizedBox(height: 10),
+                              Text(
+                                player.name ?? "",
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                player.sport.toString(),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                player.country.toString(),
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(
+                                  height: 16,
+                                  child: VerticalDivider(
+                                    thickness: 4,
+                                    width: 0,
+                                    color: AppColors.secondaryColors,
+                                  ),
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  "aboutTitle".tr(context),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primaryColors,
+                                  ),
+                                ),
+                              ],
                             ),
+                            Text("-"),
                             const SizedBox(height: 10),
-                            Text(
-                              player.name ?? "",
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  height: 16,
+                                  child: VerticalDivider(
+                                    thickness: 4,
+                                    width: 0,
+                                    color: AppColors.secondaryColors,
+                                  ),
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  "achievementsTitle".tr(context),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primaryColors,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              player.sport.toString(),
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              player.country.toString(),
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
+                            Text(player.achievement ?? ""),
                           ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(
-                                height: 16,
-                                child: VerticalDivider(
-                                  thickness: 4,
-                                  width: 0,
-                                  color: AppColors.secondaryColors,
-                                ),
-                              ),
-                              SizedBox(width: 8),
-                              Text(
-                                "aboutTitle".tr(context),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primaryColors,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text("-"),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              SizedBox(
-                                height: 16,
-                                child: VerticalDivider(
-                                  thickness: 4,
-                                  width: 0,
-                                  color: AppColors.secondaryColors,
-                                ),
-                              ),
-                              SizedBox(width: 8),
-                              Text(
-                                "achievementsTitle".tr(context),
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primaryColors,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(player.achievement ?? ""),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
