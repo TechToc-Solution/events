@@ -1,7 +1,7 @@
 class Urls {
   //base urls
-  static String ip = "mkacademyapp.com";
-  static String baseUrl = "http://$ip/api/";
+  static String ip = "www.mbrawards.ae";
+  static String baseUrl = "https:///CSA/webServices/SelectionService.asmx";
 
   //auth endpoint
   static String login = "auth/login";
