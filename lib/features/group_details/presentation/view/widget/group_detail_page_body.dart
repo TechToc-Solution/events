@@ -1,6 +1,7 @@
 import 'package:events/core/utils/functions.dart';
 import 'package:events/core/utils/styles.dart';
 import 'package:events/features/group_details/data/model/group_detail_model.dart';
+import 'package:events/features/group_details/presentation/view/conditions.dart';
 import 'package:events/features/group_details/presentation/view/custom_button.dart';
 import 'package:events/features/group_details/presentation/view/submited_group_success_page.dart';
 import 'package:events/features/group_details/presentation/view/widget/player_card.dart';
@@ -36,7 +37,9 @@ class GroupDetailsPageBody extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 4),
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [AppColors.primaryColors, AppColors.secondaryColors]),
+              gradient: LinearGradient(
+                colors: [AppColors.primaryColors, AppColors.secondaryColors],
+              ),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
@@ -46,31 +49,43 @@ class GroupDetailsPageBody extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Container(
-            width: double.infinity,
-            margin: const EdgeInsets.symmetric(vertical: 4),
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppColors.primaryColors, width: 2),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "view_selection_criteria".tr(context),
-                  style: Styles.textStyle20.copyWith(color: Colors.black),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(width: 8),
-                CircleAvatar(
-                  radius: 18,
-                  backgroundColor: AppColors.primaryColors,
-                  child: const Icon(Icons.check_circle_outline_rounded, size: 18, color: Colors.white),
-                ),
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ConditionsScreen()),
+              );
+            },
+            child: Container(
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: AppColors.primaryColors, width: 2),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "view_selection_criteria".tr(context),
+                    style: Styles.textStyle20.copyWith(color: Colors.black),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(width: 8),
+                  CircleAvatar(
+                    radius: 18,
+                    backgroundColor: AppColors.primaryColors,
+                    child: const Icon(
+                      Icons.check_circle_outline_rounded,
+                      size: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 
@@ -106,22 +121,36 @@ class GroupDetailsPageBody extends StatelessWidget {
               children: [
                 Text(
                   "add_notes".tr(context),
-                  style: Styles.textStyle16.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                  style: Styles.textStyle16.copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Container(
                   padding: EdgeInsets.zero,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.white),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                  ),
                   child: TextField(
                     controller: notesController,
                     maxLines: 3,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey[200]!)),
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey[200]!)),
-                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey[200]!)),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
                       fillColor: Colors.white,
                       hintText: "add_notes_hint".tr(context),
-                      hintStyle: Styles.textStyle13.copyWith(color: Colors.black45),
+                      hintStyle: Styles.textStyle13.copyWith(
+                        color: Colors.black45,
+                      ),
                     ),
                   ),
                 ),
@@ -132,22 +161,32 @@ class GroupDetailsPageBody extends StatelessWidget {
           BlocConsumer<PlayerSelectionCubit, PlayerSelectionState>(
             listener: (context, state) {
               if (state is PlayerSelectionSuccess) {
-                messages(context, "selection_success".tr(context), Colors.green);
+                messages(
+                  context,
+                  "selection_success".tr(context),
+                  Colors.green,
+                );
               }
               if (state is PlayerSelectionError) {
                 messages(context, state.message, Colors.red);
               }
             },
             builder: (context, state) {
-              final selectdPlayers = context.read<PlayerSelectionCubit>().selectedPlayers;
-              final slectedGdetail = groupDetails.where((element) => selectdPlayers.contains(element.id)).toList();
+              final selectdPlayers = context
+                  .read<PlayerSelectionCubit>()
+                  .selectedPlayers;
+              final slectedGdetail = groupDetails
+                  .where((element) => selectdPlayers.contains(element.id))
+                  .toList();
               return CustomButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          SubmitedGroupSuccessPage(groupDetails: slectedGdetail, groupName: groupName),
+                      builder: (context) => SubmitedGroupSuccessPage(
+                        groupDetails: slectedGdetail,
+                        groupName: groupName,
+                      ),
                     ),
                   );
                   // if (selectdPlayers.isNotEmpty) {
@@ -163,8 +202,15 @@ class GroupDetailsPageBody extends StatelessWidget {
                   // }
                 },
                 child: state is PlayerSelectionLoading
-                    ? SizedBox(height: 20, width: 20, child: const CircularProgressIndicator())
-                    : Text("accept_selection".tr(context), style: Styles.textStyle16.copyWith(color: Colors.white)),
+                    ? SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: const CircularProgressIndicator(),
+                      )
+                    : Text(
+                        "accept_selection".tr(context),
+                        style: Styles.textStyle16.copyWith(color: Colors.white),
+                      ),
               );
             },
           ),
