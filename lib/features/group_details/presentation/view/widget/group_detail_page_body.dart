@@ -2,7 +2,6 @@ import 'package:events/core/utils/functions.dart';
 import 'package:events/core/utils/styles.dart';
 import 'package:events/features/group_details/data/model/group_detail_model.dart';
 import 'package:events/features/group_details/presentation/view/custom_button.dart';
-import 'package:events/features/group_details/presentation/view/group_detail_page.dart';
 import 'package:events/features/group_details/presentation/view/submited_group_success_page.dart';
 import 'package:events/features/group_details/presentation/view/widget/player_card.dart';
 import 'package:events/features/group_details/presentation/view/widget/selection_indicator.dart';
@@ -12,10 +11,8 @@ import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../params/player_selection_params.dart';
-
-class GroupDetailsPageBoyd extends StatelessWidget {
-  const GroupDetailsPageBoyd({
+class GroupDetailsPageBody extends StatelessWidget {
+  const GroupDetailsPageBody({
     super.key,
     required this.groupDetails,
     required this.groupName,

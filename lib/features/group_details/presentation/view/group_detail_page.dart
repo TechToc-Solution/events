@@ -67,7 +67,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
               builder: (context, state) {
                 if (state is GetGroupDetailsSuccess) {
                   final groupDetails = state.groups;
-                  return GroupDetailsPageBoyd(
+                  return GroupDetailsPageBody(
                     groupName: widget.groupName,
                     numOfSelection: widget.numOfSelection,
                     groupDetails: groupDetails,

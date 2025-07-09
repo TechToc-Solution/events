@@ -189,5 +189,7 @@
     "your_choices" : "Your choices",
     "your_group_has_been_submitted_successfully": "Your group has been submitted successfully for",
     "thank_you" : "Thank you",
-    "backe_to_category" : "back to category"
+    "backe_to_category" : "back to category",
+    "aboutTitle": "Overview",
+    "achievementsTitle": "Achievements"
 }
