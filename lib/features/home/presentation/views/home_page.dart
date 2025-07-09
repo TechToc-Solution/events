@@ -1,5 +1,6 @@
 import 'package:events/core/locale/locale_cubit.dart';
 import 'package:events/core/shared/cubits/token/token_cubit.dart';
+import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/constats.dart';
 import 'package:events/core/utils/functions.dart';
@@ -23,6 +24,16 @@ class HomePage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: AppColors.primaryColors,
+              title: Row(
+                children: [
+                  Icon(Icons.phone, color: Colors.white),
+                  SizedBox(width: 4),
+                  Text(
+                    "contact_us".tr(context),
+                    style: TextStyle(fontFamily: "cocon-next-arabic"),
+                  ),
+                ],
+              ),
               actions: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
