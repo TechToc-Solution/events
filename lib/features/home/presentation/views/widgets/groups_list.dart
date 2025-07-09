@@ -31,6 +31,9 @@ class GroupsList extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 4),
             padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(color: Colors.black.withOpacity(0.25), offset: Offset(0, 4), blurRadius: 4, spreadRadius: 1),
+              ],
               color: Colors.white,
               border: Border.all(color: AppColors.primaryColors, width: 2),
               borderRadius: BorderRadius.circular(8),
