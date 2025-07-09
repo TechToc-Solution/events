@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:events/core/locale/locale_cubit.dart';
 import 'package:events/core/shared/cubits/token/token_cubit.dart';
 import 'package:events/core/utils/colors.dart';

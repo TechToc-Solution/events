@@ -1,5 +1,3 @@
-import 'package:events/core/utils/app_localizations.dart';
-import 'package:events/core/utils/colors.dart';
 import 'package:events/features/home/data/model/home_model.dart';
 import 'package:events/features/home/presentation/views/widgets/countdown_timer_widget.dart';
 import 'package:events/features/home/presentation/views/widgets/groups_list.dart';
