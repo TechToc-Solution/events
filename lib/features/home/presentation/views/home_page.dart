@@ -34,15 +34,14 @@ class HomePage extends StatelessWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
             onPressed: () async {
-              final currentLocale = Localizations.localeOf(
-                context,
-              ).languageCode;
               final cubit = context.read<LocaleCubit>();
-              if (currentLocale == 'en') {
-                cubit.changeLanguage('ar');
-              } else {
-                cubit.changeLanguage('en');
-              }
+              final currentLocale = cubit.currentLocale.languageCode;
+
+              final newLang = currentLocale == 'en' ? 'ar' : 'en';
+
+              await cubit.changeLanguage(newLang);
+
+              await context.read<TokenCubit>().getToken(context);
 
               resetHomeCubits(context);
             },
