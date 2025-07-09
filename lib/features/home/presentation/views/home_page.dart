@@ -17,52 +17,50 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TokenCubit, TokenState>(
-      builder: (context, tokenState) {
-        if (tokenState is SuccessTokenState) {
-          context.read<HomeCubit>().getHome();
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: AppColors.primaryColors,
-              title: Row(
-                children: [
-                  Icon(Icons.phone, color: Colors.white),
-                  SizedBox(width: 4),
-                  Text(
-                    "contact_us".tr(context),
-                    style: TextStyle(fontFamily: "cocon-next-arabic"),
-                  ),
-                ],
-              ),
-              actions: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                  ),
-                  onPressed: () async {
-                    final currentLocale = Localizations.localeOf(
-                      context,
-                    ).languageCode;
-                    final cubit = context.read<LocaleCubit>();
-                    if (currentLocale == 'en') {
-                      cubit.changeLanguage('ar');
-                    } else {
-                      cubit.changeLanguage('en');
-                    }
-
-                    resetHomeCubits(context);
-                  },
-                  child: Text(
-                    Localizations.localeOf(context).languageCode == "ar"
-                        ? "English"
-                        : "Arabic",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                ),
-                SizedBox(width: 4),
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryColors,
+        title: Row(
+          children: [
+            Icon(Icons.phone, color: Colors.white),
+            SizedBox(width: 4),
+            Text(
+              "contact_us".tr(context),
+              style: TextStyle(fontFamily: "cocon-next-arabic"),
             ),
-            body: SafeArea(
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+            onPressed: () async {
+              final currentLocale = Localizations.localeOf(
+                context,
+              ).languageCode;
+              final cubit = context.read<LocaleCubit>();
+              if (currentLocale == 'en') {
+                cubit.changeLanguage('ar');
+              } else {
+                cubit.changeLanguage('en');
+              }
+
+              resetHomeCubits(context);
+            },
+            child: Text(
+              Localizations.localeOf(context).languageCode == "ar"
+                  ? "English"
+                  : "Arabic",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+          ),
+          SizedBox(width: 4),
+        ],
+      ),
+      body: BlocBuilder<TokenCubit, TokenState>(
+        builder: (context, tokenState) {
+          if (tokenState is SuccessTokenState) {
+            context.read<HomeCubit>().getHome();
+            return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: kHorizontalPadding,
@@ -96,19 +94,19 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          );
-        } else if (tokenState is ErrorTokenState) {
-          return Center(
-            child: CustomErrorWidget(
-              errorMessage: tokenState.msg,
-              onRetry: () => context.read<TokenCubit>().getToken(context),
-            ),
-          );
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
+            );
+          } else if (tokenState is ErrorTokenState) {
+            return Center(
+              child: CustomErrorWidget(
+                errorMessage: tokenState.msg,
+                onRetry: () => context.read<TokenCubit>().getToken(context),
+              ),
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 }
