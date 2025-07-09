@@ -188,5 +188,10 @@
     "days": "أيام",
     "group_hint_1": "اختر أفضل",
     "group_hint_2": "اختيارات بالترتيب",
-    "contact_us": "تواصل معنا"
+    "contact_us": "تواصل معنا",
+    "add_notes": "اضافة ملاحظات",
+    "add_notes_hint": "ادخل اي ملاحظات تراها مناسبة",
+    "accept_selection": "اعتماد الاختيار",
+    "view_selection_criteria": "اطلاع على معايير الاختيار",
+    "best_sport_personality": "الشخصية الرياضية العالمية"
 }

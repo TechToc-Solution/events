@@ -179,5 +179,10 @@
     "days":"Days",
     "group_hint_1":"Choose better",
     "group_hint_2":"Choices in order",
-    "contact_us": "Contact Us"
+    "contact_us": "Contact Us",
+    "add_notes": "Add Notes",
+    "add_notes_hint": "Enter any notes you consider appropriate",
+    "accept_selection": "Accept Selection",
+    "view_selection_criteria": "View Selection Criteria",
+    "best_sport_personality": "Best Sport Personality"
 }
