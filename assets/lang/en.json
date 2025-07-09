@@ -184,5 +184,10 @@
     "add_notes_hint": "Enter any notes you consider appropriate",
     "accept_selection": "Accept Selection",
     "view_selection_criteria": "View Selection Criteria",
-    "best_sport_personality": "Best Sport Personality"
+    "best_sport_personality": "Best Sport Personality",
+    "select_at_least_players" : "Please select players to continue",
+    "your_choices" : "Your choices",
+    "your_group_has_been_submitted_successfully": "Your group has been submitted successfully for",
+    "thank_you" : "Thank you",
+    "backe_to_category" : "back to category"
 }

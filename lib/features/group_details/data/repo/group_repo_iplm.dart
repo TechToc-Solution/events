@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:events/core/Api_services/api_services.dart';
 import 'package:events/core/Api_services/urls.dart';
@@ -21,12 +19,13 @@ class GroupRepoIplm implements GroupRepo {
         data: {"group": groupId},
       );
       if (resp.statusCode == 200) {
-        final jsonList = jsonDecode(resp.data) as List<dynamic>;
+        final jsonList = resp.data as List<dynamic>;
         List<GroupDetailModel> groups = jsonList.map((item) => GroupDetailModel.fromJson(item)).toList();
         return right(groups);
       }
       return left(ServerFailure(resp.data['message'] ?? ErrorHandler.defaultMessage()));
     } catch (e) {
+      print(e.toString());
       return left(ErrorHandler.handle(e));
     }
   }

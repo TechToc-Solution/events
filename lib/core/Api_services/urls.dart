@@ -18,6 +18,7 @@ class Urls {
   static String getToken = "getToken";
   static String selectionGroup = "SelectionGroup";
   static String selectionPersons = "SelectionPersons";
+  static String selectionSubmit = "SelectionSubmit";
 
   //version
   static String getVersion = "versions";

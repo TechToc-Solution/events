@@ -12,7 +12,7 @@ class GroupDetailModel {
       id: json['id'],
       name: json['name'],
       sport: json['Sport'],
-      country: json['country'],
+      country: json['Country'],
       achievement: json['Acheivement'],
     );
   }

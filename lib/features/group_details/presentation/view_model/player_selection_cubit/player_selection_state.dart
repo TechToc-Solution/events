@@ -17,3 +17,16 @@ class PlayerSelectedState extends PlayerSelectionState {
   @override
   List<Object> get props => [selectedPlayers];
 }
+
+final class PlayerSelectionLoading extends PlayerSelectionState {}
+
+final class PlayerSelectionSuccess extends PlayerSelectionState {}
+
+final class PlayerSelectionError extends PlayerSelectionState {
+  final String message;
+
+  const PlayerSelectionError({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

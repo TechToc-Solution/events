@@ -193,5 +193,10 @@
     "add_notes_hint": "ادخل اي ملاحظات تراها مناسبة",
     "accept_selection": "اعتماد الاختيار",
     "view_selection_criteria": "اطلاع على معايير الاختيار",
-    "best_sport_personality": "الشخصية الرياضية العالمية"
+    "best_sport_personality": "الشخصية الرياضية العالمية",
+    "select_at_least_players" : "الرجاء اختيار لاعبين للاستمرار", 
+    "your_choices" : "اختياراتك",
+    "your_group_has_been_submitted_successfully": "تم اعتماد خيارك بنجاح  لـ",
+    "thank_you" : "شكرا لك", 
+    "backe_to_category" : "العودة الى الفئات"
 }

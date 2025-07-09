@@ -12,9 +12,10 @@ import 'package:events/core/utils/functions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupDetailPage extends StatefulWidget {
-  const GroupDetailPage({super.key, required this.groupId, required this.numOfSelection});
+  const GroupDetailPage({super.key, required this.groupId, required this.numOfSelection, required this.groupName});
   final int groupId;
   final int numOfSelection;
+  final String groupName;
   @override
   State<GroupDetailPage> createState() => _GroupDetailPageState();
 }
@@ -24,7 +25,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => PlayerSelectionCubit()..setNumOfSelection(widget.numOfSelection)),
+        BlocProvider(create: (context) => getit.get<PlayerSelectionCubit>()..setNumOfSelection(widget.numOfSelection)),
         BlocProvider(create: (context) => getit.get<GetGroupDetailsCubit>()..getGroupDetails(widget.groupId)),
       ],
       child: Scaffold(
@@ -62,26 +63,28 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding, vertical: kVerticalPadding),
-            child: SingleChildScrollView(
-              child: BlocBuilder<GetGroupDetailsCubit, GetGroupDetailsState>(
-                builder: (context, state) {
-                  if (state is GetGroupDetailsSuccess) {
-                    final groupDetails = state.groups;
-                    return GroupDetailsPageBoyd(widget: widget, groupDetails: groupDetails);
-                  } else if (state is GetGroupDetailsError) {
-                    return Center(
-                      child: CustomErrorWidget(
-                        errorMessage: state.message,
-                        onRetry: () {
-                          context.read<GetGroupDetailsCubit>().getGroupDetails(widget.groupId);
-                        },
-                      ),
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
+            child: BlocBuilder<GetGroupDetailsCubit, GetGroupDetailsState>(
+              builder: (context, state) {
+                if (state is GetGroupDetailsSuccess) {
+                  final groupDetails = state.groups;
+                  return GroupDetailsPageBoyd(
+                    groupDetails: groupDetails,
+                    groupName: widget.groupName,
+                    numOfSelection: widget.numOfSelection,
+                  );
+                } else if (state is GetGroupDetailsError) {
+                  return Center(
+                    child: CustomErrorWidget(
+                      errorMessage: state.message,
+                      onRetry: () {
+                        context.read<GetGroupDetailsCubit>().getGroupDetails(widget.groupId);
+                      },
+                    ),
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ),
         ),
