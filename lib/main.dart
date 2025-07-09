@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => LocaleCubit()..getSaveLanguage()),
+        BlocProvider(create: (context) => LocaleCubit()),
         BlocProvider(
           create: (context) =>
               TokenCubit(getit.get<TokenRepo>())..getToken(context),

@@ -30,20 +30,21 @@ class HomePage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     final currentLocale = Localizations.localeOf(
                       context,
-                    ).toString();
+                    ).languageCode;
                     final cubit = context.read<LocaleCubit>();
                     if (currentLocale == 'en') {
                       cubit.changeLanguage('ar');
                     } else {
                       cubit.changeLanguage('en');
                     }
+
                     resetHomeCubits(context);
                   },
                   child: Text(
-                    Localizations.localeOf(context).toString() == "ar"
+                    Localizations.localeOf(context).languageCode == "ar"
                         ? "English"
                         : "Arabic",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),

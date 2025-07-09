@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 part 'locale_state.dart';
 
 class LocaleCubit extends Cubit<ChangeLocaleState> {
-  LocaleCubit() : super(ChangeLocaleState(locale: const Locale("en")));
-
+  LocaleCubit() : super(ChangeLocaleState(locale: const Locale("en"))) {
+    getSaveLanguage();
+  }
+  Locale get currentLocale => state.locale;
   Future<void> getSaveLanguage() async {
-    final String cachedLanguageCode = CacheHelper.getData(
-      key: "LOCALE",
-    ).toString();
-
+    final cachedLanguageCode =
+        CacheHelper.getData(key: "LOCALE")?.toString() ?? "en";
     lang = cachedLanguageCode;
     emit(ChangeLocaleState(locale: Locale(cachedLanguageCode)));
   }
