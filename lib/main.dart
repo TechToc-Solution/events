@@ -37,7 +37,9 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               TokenCubit(getit.get<TokenRepo>())..getToken(context),
         ),
-        BlocProvider(create: (_) => CountdownCubit()),
+        BlocProvider<CountdownCubit>.value(
+          value: countdownCubit,
+        ),
         BlocProvider(
           create: (context) => HomeCubit(getit.get<HomeRepo>(), countdownCubit),
         ),

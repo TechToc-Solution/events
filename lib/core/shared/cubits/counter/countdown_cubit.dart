@@ -20,7 +20,7 @@ class CountdownCubit extends Cubit<CountdownState> {
     _timer?.cancel();
     emit(CountdownState(duration));
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      final newDuration = state.remaining - Duration(seconds: 1);
+      final newDuration = state.remaining - const Duration(seconds: 1);
       if (newDuration <= Duration.zero) {
         _timer?.cancel();
         emit(const CountdownState(Duration.zero));
