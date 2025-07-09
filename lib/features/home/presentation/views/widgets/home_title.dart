@@ -8,7 +8,7 @@ class HomeTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.borderColors, width: 2),
         color: AppColors.secColors,
@@ -17,7 +17,16 @@ class HomeTitle extends StatelessWidget {
 
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-        color: AppColors.primaryColors,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.primaryColors,
+              const Color.fromARGB(255, 189, 82, 0),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
         child: Column(
           children: [
             Text(
@@ -32,7 +41,11 @@ class HomeTitle extends StatelessWidget {
             Text(
               textAlign: TextAlign.center,
               "home_title_2".tr(context),
-              style: TextStyle(color: Colors.white, fontSize: 18),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),

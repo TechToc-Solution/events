@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => CountdownCubit(
-            Duration(days: 29, hours: 23, minutes: 47, seconds: 41),
+            Duration(days: 0, hours: 0, minutes: 0, seconds: 41),
           ),
         ),
         BlocProvider(create: (context) => HomeCubit(getit.get<HomeRepo>())),
