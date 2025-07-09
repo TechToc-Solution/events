@@ -166,5 +166,17 @@
     "privacy_title": "By continuing, you agree to our Privacy Policy.",
     "privacy_link": "Read Privacy Policy",
     "privacy_checkbox": "I accept the privacy policy",
-    "continue_button": "Continue"
+    "continue_button": "Continue",
+
+
+    "home_title_1":"Mohammed bin Rashid Al Maktoum Award",
+    "home_title_2":"for sports creativity",
+    "time_left":"Time left to choose",
+    "time_left_hint": "Share with us your choice of nominees from each category.",
+    "seconds":"Seconds",
+    "minutes":"Minutes",
+    "hours":"Hours",
+    "days":"Days",
+    "group_hint_1":"Choose better",
+    "group_hint_2":"Choices in order"
 }

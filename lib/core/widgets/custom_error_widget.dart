@@ -1,7 +1,6 @@
 import 'package:events/core/utils/app_localizations.dart';
 import 'package:flutter/material.dart';
 
-
 import '../utils/constats.dart';
 import '../utils/styles.dart';
 
@@ -10,7 +9,6 @@ class CustomErrorWidget extends StatelessWidget {
   final VoidCallback onRetry;
   final Color? backgroundColor;
   final Color? textColor;
-  final String? retryButtonText;
 
   const CustomErrorWidget({
     super.key,
@@ -18,7 +16,6 @@ class CustomErrorWidget extends StatelessWidget {
     required this.onRetry,
     this.backgroundColor,
     this.textColor,
-    this.retryButtonText,
   });
 
   @override
@@ -30,16 +27,14 @@ class CustomErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            Icons.error_outline_rounded,
-            size: 50,
-            color: Colors.red,
-          ),
+          Icon(Icons.error_outline_rounded, size: 50, color: Colors.red),
           const SizedBox(height: kSizedBoxHeight),
           Text(
             errorMessage,
             style: Styles.textStyle18.copyWith(
-                color: textColor ?? Colors.white, fontWeight: FontWeight.w600),
+              color: textColor ?? Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: kSizedBoxHeight),
@@ -49,15 +44,21 @@ class CustomErrorWidget extends StatelessWidget {
               backgroundColor: Colors.red,
               foregroundColor: colorScheme.errorContainer,
               padding: const EdgeInsets.symmetric(
-                  horizontal: kHorizontalPadding, vertical: kVerticalPadding),
+                horizontal: kHorizontalPadding,
+                vertical: kVerticalPadding,
+              ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
             icon: const Icon(Icons.refresh_rounded),
-            label: Text(retryButtonText ?? "try_again".tr(context),
-                style: Styles.textStyle16.copyWith(
-                    fontWeight: FontWeight.w600, color: Colors.white)),
+            label: Text(
+              "try_again".tr(context),
+              style: Styles.textStyle16.copyWith(
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
           ),
         ],
       ),

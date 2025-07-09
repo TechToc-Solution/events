@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:events/core/shared/cubits/token/token_cubit.dart';
 import 'package:events/core/utils/app_localizations.dart';
 import 'package:flutter/material.dart' hide Key;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/cutom_dialog.dart';
-
 
 //navigators
 Route goRoute({required var x}) {
@@ -16,10 +17,7 @@ Route goRoute({required var x}) {
       const curve = Curves.fastEaseInToSlowEaseOut;
 
       final tween = Tween(begin: begin, end: end);
-      final curvedAnimation = CurvedAnimation(
-        parent: animation,
-        curve: curve,
-      );
+      final curvedAnimation = CurvedAnimation(parent: animation, curve: curve);
       return SlideTransition(
         position: tween.animate(curvedAnimation),
         child: child,
@@ -30,14 +28,16 @@ Route goRoute({required var x}) {
 
 //messages
 void messages(BuildContext context, String error, Color c, {int msgTime = 2}) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    behavior: SnackBarBehavior.floating,
-    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-    backgroundColor: c,
-    content: Text(error),
-    duration: Duration(seconds: msgTime),
-  ));
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      behavior: SnackBarBehavior.floating,
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      backgroundColor: c,
+      content: Text(error),
+      duration: Duration(seconds: msgTime),
+    ),
+  );
 }
 
 void showCustomDialog({
@@ -97,13 +97,8 @@ void showAwesomeDialog({
 
 //reset home
 resetHomeCubits(BuildContext context) {
-  // context.read<AdsCubit>().resetPagination();
-  // context.read<LeaderboardCubit>().getLeaderboard(loadMore: false);
-  // context.read<SubjectsCubit>().getSubjects();
-  // context.read<AdsCubit>().getAllAds();
-  // isGuest ? null : context.read<ProfileCubit>().getProfile();
+  context.read<TokenCubit>().getToken(context);
 }
-
 
 Future<bool> isRunningOnEmulator() async {
   final deviceInfo = DeviceInfoPlugin();

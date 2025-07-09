@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:events/core/Api_services/api_services.dart';
 import 'package:events/core/Api_services/urls.dart';
@@ -21,7 +23,8 @@ class HomeRepoIplm implements HomeRepo {
         data: {},
       );
       if (resp.statusCode == 200) {
-        return right(HomeData.fromJson(resp.data));
+        final jsonList = jsonDecode(resp.data) as List<dynamic>;
+        return right(HomeData.fromJson(jsonList));
       }
       return left(
         ServerFailure(resp.data['message'] ?? ErrorHandler.defaultMessage()),
