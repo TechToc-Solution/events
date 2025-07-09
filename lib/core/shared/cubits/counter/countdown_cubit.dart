@@ -12,21 +12,20 @@ class CountdownState extends Equatable {
 }
 
 class CountdownCubit extends Cubit<CountdownState> {
-  final Duration initialDuration;
   Timer? _timer;
 
-  CountdownCubit(this.initialDuration) : super(CountdownState(initialDuration)) {
-    _startTimer();
-  }
+  CountdownCubit() : super(const CountdownState(Duration.zero));
 
-  void _startTimer() {
+  void start(Duration duration) {
     _timer?.cancel();
-    _timer = Timer.periodic(Duration(seconds: 1), (_) {
-      final secondsLeft = state.remaining.inSeconds;
-      if (secondsLeft <= 0) {
+    emit(CountdownState(duration));
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      final newDuration = state.remaining - Duration(seconds: 1);
+      if (newDuration <= Duration.zero) {
         _timer?.cancel();
+        emit(const CountdownState(Duration.zero));
       } else {
-        emit(CountdownState(Duration(seconds: secondsLeft - 1)));
+        emit(CountdownState(newDuration));
       }
     });
   }

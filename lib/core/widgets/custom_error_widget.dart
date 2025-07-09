@@ -32,7 +32,7 @@ class CustomErrorWidget extends StatelessWidget {
           Text(
             errorMessage,
             style: Styles.textStyle18.copyWith(
-              color: textColor ?? Colors.white,
+              color: textColor ?? Colors.black,
               fontWeight: FontWeight.w600,
             ),
             textAlign: TextAlign.center,

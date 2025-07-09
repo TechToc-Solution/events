@@ -20,11 +20,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   setupLocatorServices();
-  runApp(const MyApp());
+  final countdownCubit = CountdownCubit();
+  runApp(MyApp(countdownCubit: countdownCubit));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.countdownCubit});
+  final CountdownCubit countdownCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +37,10 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               TokenCubit(getit.get<TokenRepo>())..getToken(context),
         ),
+        BlocProvider(create: (_) => CountdownCubit()),
         BlocProvider(
-          create: (_) => CountdownCubit(
-            Duration(days: 29, hours: 8, minutes: 1, seconds: 41),
-          ),
+          create: (context) => HomeCubit(getit.get<HomeRepo>(), countdownCubit),
         ),
-        BlocProvider(create: (context) => HomeCubit(getit.get<HomeRepo>())),
       ],
       child: BlocBuilder<LocaleCubit, ChangeLocaleState>(
         builder: (context, state) {

@@ -1,12 +1,20 @@
 class HomeData {
+  String? text;
+  DateTime? time;
   List<GroupData>? groups;
 
   HomeData({this.groups});
 
-  HomeData.fromJson(List<dynamic> jsonList) {
-    groups = <GroupData>[];
-    if (jsonList.isNotEmpty) {
-      groups = jsonList.map((e) => GroupData.fromJson(e)).toList();
+  HomeData.fromJson(Map<String, dynamic> json) {
+    text = json['text'];
+    time = DateTime.tryParse(json['time'] ?? '');
+
+    if (json['groups'] != null) {
+      groups = List<GroupData>.from(
+        json['groups'].map((e) => GroupData.fromJson(e)),
+      );
+    } else {
+      groups = [];
     }
   }
 }
