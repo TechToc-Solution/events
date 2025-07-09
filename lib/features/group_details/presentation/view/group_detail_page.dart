@@ -63,30 +63,28 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding, vertical: kVerticalPadding),
-            child: SingleChildScrollView(
-              child: BlocBuilder<GetGroupDetailsCubit, GetGroupDetailsState>(
-                builder: (context, state) {
-                  if (state is GetGroupDetailsSuccess) {
-                    final groupDetails = state.groups;
-                    return GroupDetailsPageBoyd(
-                      groupName: widget.groupName,
-                      numOfSelection: widget.numOfSelection,
-                      groupDetails: groupDetails,
-                    );
-                  } else if (state is GetGroupDetailsError) {
-                    return Center(
-                      child: CustomErrorWidget(
-                        errorMessage: state.message,
-                        onRetry: () {
-                          context.read<GetGroupDetailsCubit>().getGroupDetails(widget.groupId);
-                        },
-                      ),
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
+            child: BlocBuilder<GetGroupDetailsCubit, GetGroupDetailsState>(
+              builder: (context, state) {
+                if (state is GetGroupDetailsSuccess) {
+                  final groupDetails = state.groups;
+                  return GroupDetailsPageBoyd(
+                    groupName: widget.groupName,
+                    numOfSelection: widget.numOfSelection,
+                    groupDetails: groupDetails,
+                  );
+                } else if (state is GetGroupDetailsError) {
+                  return Center(
+                    child: CustomErrorWidget(
+                      errorMessage: state.message,
+                      onRetry: () {
+                        context.read<GetGroupDetailsCubit>().getGroupDetails(widget.groupId);
+                      },
+                    ),
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ),
         ),
