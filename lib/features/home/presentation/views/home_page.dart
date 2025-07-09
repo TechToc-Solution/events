@@ -1,3 +1,4 @@
+import 'package:events/core/shared/cubits/token/token_cubit.dart';
 import 'package:events/core/utils/constats.dart';
 import 'package:events/features/home/presentation/views-model/home/home_cubit.dart';
 import 'package:flutter/material.dart';
@@ -13,39 +14,51 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: kHorizontalPadding,
-            vertical: kVerticalPadding,
-          ),
-          child: Column(
-            children: [
-              BlocBuilder<HomeCubit, HomeState>(
-                builder: (context, state) {
-                  // log("$studentsState, $subjectsState, $adsState");
-                  // Error Handling
-                  if (state is ErrorHomeState) {
-                    return Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: CustomErrorWidget(
-                        errorMessage: state.msg,
-                        onRetry: () => context.read<HomeCubit>().getHome(),
-                      ),
-                    );
-                  }
-                  // Success State
-                  else if (state is SuccessHomeState) {
-                    return Expanded(child: HomePageBody());
-                  }
-                  // Loading State with Shimmer
-                  return Expanded(child: const CustomHomeShimmer());
-                },
+    return BlocListener<TokenCubit, TokenState>(
+      listener: (context, state) {
+        if (state is SuccessTokenState) {
+          context.read<HomeCubit>().getHome();
+        }
+      },
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          return Scaffold(
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: kHorizontalPadding,
+                  vertical: kVerticalPadding,
+                ),
+                child: Column(
+                  children: [
+                    BlocBuilder<HomeCubit, HomeState>(
+                      builder: (context, state) {
+                        // log("$studentsState, $subjectsState, $adsState");
+                        // Error Handling
+                        if (state is ErrorHomeState) {
+                          return Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: CustomErrorWidget(
+                              errorMessage: state.msg,
+                              onRetry: () =>
+                                  context.read<HomeCubit>().getHome(),
+                            ),
+                          );
+                        }
+                        // Success State
+                        else if (state is SuccessHomeState) {
+                          return Expanded(child: HomePageBody());
+                        }
+                        // Loading State with Shimmer
+                        return Expanded(child: const CustomHomeShimmer());
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

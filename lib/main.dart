@@ -1,4 +1,6 @@
 import 'package:events/core/locale/locale_cubit.dart';
+import 'package:events/core/shared/cubits/token/token_cubit.dart';
+import 'package:events/core/shared/repos/token_repo/token_repo_iplm.dart';
 import 'package:events/core/utils/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:events/core/utils/cache_helper.dart';
@@ -6,7 +8,7 @@ import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/routs.dart';
 import 'package:events/core/utils/services_locater.dart';
 import 'package:events/core/utils/styles.dart';
-import 'package:events/features/home/data/repo/ads/home_repo_iplm.dart';
+import 'package:events/features/home/data/repo/home/home_repo_iplm.dart';
 import 'package:events/features/home/presentation/views-model/home/home_cubit.dart';
 import 'package:events/features/home/presentation/views/home_page.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => LocaleCubit()..getSaveLanguage()),
         BlocProvider(
-          create: (context) => HomeCubit(getit.get<HomeRepoIplm>())..getHome(),
+          create: (context) => TokenCubit(getit.get<TokenRepoIplm>())..getToken(),
+        ),
+        BlocProvider(
+          create: (context) => HomeCubit(getit.get<HomeRepoIplm>()),
         ),
       ],
       child: BlocBuilder<LocaleCubit, ChangeLocaleState>(

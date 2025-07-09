@@ -1,4 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:events/core/shared/repos/token_repo/token_repo.dart';
+import 'package:events/core/shared/repos/token_repo/token_repo_iplm.dart';
+import 'package:events/features/home/data/repo/home/home.dart';
+import 'package:events/features/home/data/repo/home/home_repo_iplm.dart';
 import 'package:get_it/get_it.dart';
 import '../Api_services/api_services.dart';
 
@@ -18,19 +22,6 @@ void setupLocatorServices() {
   // init API Service
   getit.registerLazySingleton<ApiServices>(() => ApiServices(getit.get<Dio>()));
 
-  //auth singleton
-  // getit.registerSingleton<LoginRepo>(LoginRepoIpml(getit.get<ApiServices>()));
-
-  // getit.registerSingleton<TokenRepo>(TokenRepoIpml(getit.get<ApiServices>()));
-
-  // getit.registerSingleton<RegisterRepo>(
-  //     RegisterRepoIplm(getit.get<ApiServices>()));
-
-  // getit.registerSingleton<ProfileRepo>(
-  //     ProfileRepoIplm(getit.get<ApiServices>()));
-
-  // getit.registerSingleton<LogoutRepo>(LogoutRepoIplm(getit.get<ApiServices>()));
-
-  // getit.registerSingleton<ResetPasswordRepo>(
-  //     ResetPasswordRepoImpl(getit.get<ApiServices>()));
+  getit.registerSingleton<TokenRepo>(TokenRepoIplm(getit.get<ApiServices>()));
+  getit.registerSingleton<HomeRepo>(HomeRepoIplm(getit.get<ApiServices>()));
 }

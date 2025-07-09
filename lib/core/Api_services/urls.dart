@@ -15,8 +15,9 @@ class Urls {
   static String resendCode = "/auth/resend-code";
   static String updateProfile = "auth/me";
 
-  //leaderbord
-  static String getHome = "home";
+  static String getToken = "getToken";
+  static String selectionGroup = "SelectionGroup";
+  static String selectionPersons = "SelectionPersons";
 
   //version
   static String getVersion = "versions";

@@ -1,44 +1,34 @@
 class HomeData {
-  List<Ads>? ads;
+  List<GroupData>? groups;
 
-  HomeData({this.ads});
+  HomeData({this.groups});
 
-  HomeData.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      ads = <Ads>[];
-      json['data'].forEach((v) {
-        ads!.add(Ads.fromJson(v));
-      });
+  HomeData.fromJson(List<dynamic> jsonList) {
+    groups = <GroupData>[];
+    if (jsonList.isNotEmpty) {
+      groups = jsonList.map((e) => GroupData.fromJson(e)).toList();
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (ads != null) {
-      data['data'] = ads!.map((v) => v.toJson()).toList();
-    }
-    return data;
   }
 }
 
-class Ads {
+class GroupData {
   int? id;
-  String? image;
-  String? createdAt;
+  String? name;
+  int? countSelect;
 
-  Ads({this.id, this.image, this.createdAt});
+  GroupData({this.id, this.name, this.countSelect});
 
-  Ads.fromJson(Map<String, dynamic> json) {
+  GroupData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    image = json['image'];
-    createdAt = json['created_at'];
+    name = json['name'];
+    countSelect = json['count_select'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['image'] = image;
-    data['created_at'] = createdAt;
+    data['name'] = name;
+    data['count_select'] = countSelect;
     return data;
   }
 }
