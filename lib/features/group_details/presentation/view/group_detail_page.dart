@@ -69,6 +69,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                   final groupDetails = state.groups;
                   return GroupDetailsPageBody(
                     groupName: widget.groupName,
+                    groupId: widget.groupId,
                     numOfSelection: widget.numOfSelection,
                     groupDetails: groupDetails,
                   );
