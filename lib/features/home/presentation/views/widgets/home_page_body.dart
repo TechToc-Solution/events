@@ -9,21 +9,17 @@ class HomePageBody extends StatelessWidget {
   final HomeData data;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: 8),
-        Expanded(
-          child: ListView(
-            children: [
-              HomeTitle(),
-              SizedBox(height: 12),
-              CountdownTimerWidget(),
-              SizedBox(height: 12),
-              GroupsList(data: data),
-            ],
-          ),
-        ),
-      ],
+    return Expanded(
+      child: ListView(
+        children: [
+          SizedBox(height: 12),
+          HomeTitle(),
+          SizedBox(height: 12),
+          CountdownTimerWidget(),
+          SizedBox(height: 12),
+          GroupsList(data: data),
+        ],
+      ),
     );
   }
 }

@@ -3,7 +3,6 @@ import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/constats.dart';
 import 'package:events/core/utils/functions.dart';
-import 'package:events/core/utils/styles.dart';
 import 'package:events/features/group_details/data/model/group_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -98,37 +97,66 @@ class PlayerDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 child: Center(
-                                  child: Text(
-                                    player.id.toString(),
-                                    style: Styles.textStyle25.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: LayoutBuilder(
+                                    builder: (context, constraints) {
+                                      final fontSize =
+                                          constraints.maxWidth /
+                                          (player.id.toString().length / 2);
+                                      return Text(
+                                        player.id.toString(),
+                                        style: TextStyle(
+                                          fontSize: fontSize.clamp(18, 26),
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              Text(
-                                player.name ?? "",
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  final fontSize =
+                                      constraints.maxWidth /
+                                      ((player.name?.length ?? 2) / 2);
+                                  return Text(
+                                    player.name ?? "",
+                                    style: TextStyle(
+                                      fontSize: fontSize.clamp(16, 20),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                },
                               ),
-                              Text(
-                                player.sport.toString(),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                ),
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  final fontSize =
+                                      constraints.maxWidth /
+                                      (player.sport.toString().length / 2);
+                                  return Text(
+                                    player.sport.toString(),
+                                    style: TextStyle(
+                                      fontSize: fontSize.clamp(10, 14),
+                                      color: Colors.grey,
+                                    ),
+                                  );
+                                },
                               ),
                               const SizedBox(height: 4),
-                              Text(
-                                player.country.toString(),
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  final fontSize =
+                                      constraints.maxWidth /
+                                      (player.country.toString().length / 2);
+                                  return Text(
+                                    player.country.toString(),
+                                    style: TextStyle(
+                                      fontSize: fontSize.clamp(8, 12),
+                                      color: Colors.grey,
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -150,12 +178,20 @@ class PlayerDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(width: 8),
-                                Text(
-                                  "aboutTitle".tr(context),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.primaryColors,
-                                  ),
+                                LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    final fontSize =
+                                        constraints.maxWidth /
+                                        ("aboutTitle".tr(context).length / 2);
+                                    return Text(
+                                      "aboutTitle".tr(context),
+                                      style: TextStyle(
+                                        fontSize: fontSize.clamp(10, 14),
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.primaryColors,
+                                      ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),
@@ -172,12 +208,23 @@ class PlayerDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(width: 8),
-                                Text(
-                                  "achievementsTitle".tr(context),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.primaryColors,
-                                  ),
+                                LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    final fontSize =
+                                        constraints.maxWidth /
+                                        ("achievementsTitle"
+                                                .tr(context)
+                                                .length /
+                                            2);
+                                    return Text(
+                                      "achievementsTitle".tr(context),
+                                      style: TextStyle(
+                                        fontSize: fontSize.clamp(10, 14),
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.primaryColors,
+                                      ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),

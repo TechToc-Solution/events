@@ -109,29 +109,54 @@ class PlayerCard extends StatelessWidget {
                         ),
                       ),
                       child: Center(
-                        child: Text(
-                          player.sport.toString(),
-                          style: Styles.textStyle25.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            final fontSize =
+                                constraints.maxWidth /
+                                (player.sport.toString().length / 2);
+                            return Text(
+                              player.sport.toString(),
+                              style: TextStyle(
+                                fontSize: fontSize.clamp(14, 26),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    player.name ?? "",
-                    style: Styles.textStyle16.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final fontSize =
+                          constraints.maxWidth /
+                          ((player.name?.length ?? 2) / 2);
+                      return Text(
+                        textAlign: TextAlign.center,
+
+                        player.name ?? "",
+                        style: TextStyle(
+                          fontSize: fontSize.clamp(16, 26),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    },
                   ),
                   if (player.country != null) ...[
                     const SizedBox(height: 8),
-                    Text(
-                      "${player.country}",
-                      style: Styles.textStyle15.copyWith(color: Colors.blue),
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final fontSize =
+                            constraints.maxWidth /
+                            ((player.country?.length ?? 2) / 2);
+                        return Text(
+                          "${player.country}",
+                          style: TextStyle(
+                            fontSize: fontSize.clamp(8, 18),
+                            color: Colors.blue,
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ],

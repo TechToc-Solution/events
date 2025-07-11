@@ -17,8 +17,8 @@ class HomeTitle extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.25),
             offset: Offset(0, 4),
-            blurRadius: 6, 
-            spreadRadius: 1, 
+            blurRadius: 6,
+            spreadRadius: 1,
           ),
         ],
       ),
@@ -37,23 +37,37 @@ class HomeTitle extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(
-              textAlign: TextAlign.center,
-              "home_title_1".tr(context),
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-              ),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final fontSize =
+                    constraints.maxWidth /
+                    ("home_title_1".tr(context).length / 2);
+                return Text(
+                  textAlign: TextAlign.center,
+                  "home_title_1".tr(context),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: fontSize.clamp(18, 22),
+                  ),
+                );
+              },
             ),
-            Text(
-              textAlign: TextAlign.center,
-              "home_title_2".tr(context),
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final fontSize =
+                    constraints.maxWidth /
+                    ("home_title_2".tr(context).length / 2);
+                return Text(
+                  textAlign: TextAlign.center,
+                  "home_title_2".tr(context),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: fontSize.clamp(14, 18),
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              },
             ),
           ],
         ),

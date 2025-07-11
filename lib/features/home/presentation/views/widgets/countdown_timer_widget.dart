@@ -34,13 +34,20 @@ class CountdownTimerWidget extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                "time_left".tr(context),
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryColors,
-                ),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final fontSize =
+                      constraints.maxWidth /
+                      ("time_left".tr(context).length / 2);
+                  return Text(
+                    "time_left".tr(context),
+                    style: TextStyle(
+                      fontSize: fontSize.clamp(16, 20),
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColors,
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 12),
               Row(
@@ -53,10 +60,20 @@ class CountdownTimerWidget extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              Text(
-                textAlign: TextAlign.center,
-                "time_left_hint".tr(context),
-                style: TextStyle(fontSize: 16, color: AppColors.primaryColors),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final fontSize =
+                      constraints.maxWidth /
+                      ("time_left_hint".tr(context).length / 2);
+                  return Text(
+                    textAlign: TextAlign.center,
+                    "time_left_hint".tr(context),
+                    style: TextStyle(
+                      fontSize: fontSize.clamp(12, 16),
+                      color: AppColors.primaryColors,
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -84,19 +101,32 @@ class CountdownTimerWidget extends StatelessWidget {
                 ),
               ],
             ),
-            child: Text(
-              value.toString().padLeft(2, '0'),
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primaryColors,
-              ),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final fontSize = constraints.maxWidth;
+                return Text(
+                  value.toString().padLeft(2, '0'),
+                  style: TextStyle(
+                    fontSize: fontSize.clamp(24, 32),
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryColors,
+                  ),
+                );
+              },
             ),
           ),
           const SizedBox(height: 6),
-          Text(
-            label,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final fontSize = constraints.maxWidth / (label.length / 2);
+              return Text(
+                label,
+                style: TextStyle(
+                  fontSize: fontSize.clamp(10, 14),
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            },
           ),
         ],
       ),

@@ -40,19 +40,34 @@ class GroupDetailsPageBody extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 4),
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [AppColors.primaryColors, AppColors.secondaryColors]),
+              gradient: LinearGradient(
+                colors: [AppColors.primaryColors, AppColors.secondaryColors],
+              ),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Text(
-              "best_sport_personality".tr(context),
-              style: Styles.textStyle20.copyWith(color: Colors.white),
-              textAlign: TextAlign.center,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final fontSize =
+                    constraints.maxWidth /
+                    ("best_sport_personality".tr(context).length / 2);
+                return Text(
+                  "best_sport_personality".tr(context),
+                  style: TextStyle(
+                    fontSize: fontSize.clamp(16, 20),
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                );
+              },
             ),
           ),
           const SizedBox(height: 16),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ConditionsScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ConditionsScreen()),
+              );
             },
             child: Container(
               width: double.infinity,
@@ -67,16 +82,27 @@ class GroupDetailsPageBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "view_selection_criteria".tr(context),
-                    style: Styles.textStyle20.copyWith(color: Colors.black),
-                    textAlign: TextAlign.center,
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final fontSize =
+                          constraints.maxWidth /
+                          ("view_selection_criteria".tr(context).length / 2);
+                      return Text(
+                        "view_selection_criteria".tr(context),
+                        style: TextStyle(fontSize: fontSize.clamp(16, 20)),
+                        textAlign: TextAlign.center,
+                      );
+                    },
                   ),
                   const SizedBox(width: 8),
                   CircleAvatar(
                     radius: 18,
                     backgroundColor: AppColors.primaryColors,
-                    child: const Icon(Icons.check_circle_outline_rounded, size: 18, color: Colors.white),
+                    child: const Icon(
+                      Icons.check_circle_outline_rounded,
+                      size: 18,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -100,7 +126,9 @@ class GroupDetailsPageBody extends StatelessWidget {
                 crossAxisCount = 2;
               }
               return Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth > 600 ? 24.0 : 0),
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth > 600 ? 24.0 : 0,
+                ),
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -132,24 +160,45 @@ class GroupDetailsPageBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "add_notes".tr(context),
-                  style: Styles.textStyle16.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final fontSize =
+                        constraints.maxWidth /
+                        ("add_notes".tr(context).length / 2);
+                    return Text(
+                      "add_notes".tr(context),
+                      style: TextStyle(
+                        fontSize: fontSize.clamp(12, 16),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 8),
                 Container(
                   padding: EdgeInsets.zero,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.white),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                  ),
                   child: TextField(
                     controller: notesController,
                     maxLines: 3,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey[200]!)),
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey[200]!)),
-                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey[200]!)),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[200]!),
+                      ),
                       fillColor: Colors.white,
                       hintText: "add_notes_hint".tr(context),
-                      hintStyle: Styles.textStyle13.copyWith(color: Colors.black45),
+                      hintStyle: Styles.textStyle13.copyWith(
+                        color: Colors.black45,
+                      ),
                     ),
                   ),
                 ),
@@ -160,12 +209,19 @@ class GroupDetailsPageBody extends StatelessWidget {
           BlocConsumer<PlayerSelectionCubit, PlayerSelectionState>(
             listener: (context, state) {
               if (state is PlayerSelectionSuccess) {
-                final selectdPlayers = context.read<PlayerSelectionCubit>().selectedPlayers;
-                final slectedGdetail = groupDetails.where((element) => selectdPlayers.contains(element.id)).toList();
+                final selectdPlayers = context
+                    .read<PlayerSelectionCubit>()
+                    .selectedPlayers;
+                final slectedGdetail = groupDetails
+                    .where((element) => selectdPlayers.contains(element.id))
+                    .toList();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SubmitedGroupSuccessPage(groupDetails: slectedGdetail, groupName: groupName),
+                    builder: (context) => SubmitedGroupSuccessPage(
+                      groupDetails: slectedGdetail,
+                      groupName: groupName,
+                    ),
                   ),
                 );
               }
@@ -174,23 +230,51 @@ class GroupDetailsPageBody extends StatelessWidget {
               }
             },
             builder: (context, state) {
-              final selectdPlayers = context.read<PlayerSelectionCubit>().selectedPlayers;
+              final selectdPlayers = context
+                  .read<PlayerSelectionCubit>()
+                  .selectedPlayers;
               return CustomButton(
                 onPressed: () {
                   if (selectdPlayers.isNotEmpty) {
                     context.read<PlayerSelectionCubit>().playerSelection(
-                      PlayerSelectionParams(groupId: groupId, playerId: selectdPlayers, notes: notesController.text),
+                      PlayerSelectionParams(
+                        groupId: groupId,
+                        playerId: selectdPlayers,
+                        notes: notesController.text,
+                      ),
                     );
                   } else {
-                    messages(context, "select_at_least_players".tr(context), Colors.red);
+                    messages(
+                      context,
+                      "select_at_least_players".tr(context),
+                      Colors.red,
+                    );
                   }
                 },
                 child: state is PlayerSelectionLoading
-                    ? SizedBox(height: 20, width: 20, child: const CircularProgressIndicator())
-                    : Text("accept_selection".tr(context), style: Styles.textStyle16.copyWith(color: Colors.white)),
+                    ? SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: const CircularProgressIndicator(),
+                      )
+                    : LayoutBuilder(
+                        builder: (context, constraints) {
+                          final fontSize =
+                              constraints.maxWidth /
+                              ("accept_selection".tr(context).length / 2);
+                          return Text(
+                            "accept_selection".tr(context),
+                            style: TextStyle(
+                              fontSize: fontSize.clamp(16, 20),
+                              color: Colors.white,
+                            ),
+                          );
+                        },
+                      ),
               );
             },
           ),
+          SizedBox(height: 12),
         ],
       ),
     );

@@ -13,6 +13,7 @@ class GroupsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: data.groups?.length ?? 0,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
@@ -33,19 +34,45 @@ class GroupsList extends StatelessWidget {
             padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
               boxShadow: [
-                BoxShadow(color: Colors.black.withOpacity(0.25), offset: Offset(0, 4), blurRadius: 4, spreadRadius: 1),
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.25),
+                  offset: Offset(0, 4),
+                  blurRadius: 4,
+                  spreadRadius: 1,
+                ),
               ],
               color: Colors.white,
               border: Border.all(color: AppColors.primaryColors, width: 2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: ListTile(
-              title: Text(
-                data.groups?[index].name ?? "",
-                style: TextStyle(fontSize: 26, color: AppColors.primaryColors, fontWeight: FontWeight.bold),
+              title: LayoutBuilder(
+                builder: (context, constraints) {
+                  final fontSize =
+                      constraints.maxWidth /
+                      ((data.groups![index].name?.length ?? 2) / 2);
+                  return Text(
+                    data.groups?[index].name ?? "",
+                    style: TextStyle(
+                      fontSize: fontSize.clamp(22, 26),
+                      color: AppColors.primaryColors,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
               ),
-              subtitle: Text(
-                "${"group_hint_1".tr(context)} ${data.groups?[index].countSelect ?? 0} ${"group_hint_2".tr(context)}",
+              subtitle: LayoutBuilder(
+                builder: (context, constraints) {
+                  int charNumber =
+                      "group_hint_1".tr(context).length +
+                      1 +
+                      "group_hint_2".tr(context).length;
+                  final fontSize = constraints.maxWidth / (charNumber / 2);
+                  return Text(
+                    "${"group_hint_1".tr(context)} ${data.groups?[index].countSelect ?? 0} ${"group_hint_2".tr(context)}",
+                    style: TextStyle(fontSize: fontSize.clamp(10, 14)),
+                  );
+                },
               ),
               trailing: CircleAvatar(
                 radius: 28,

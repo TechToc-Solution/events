@@ -58,9 +58,14 @@ class ConditionsScreen extends StatelessWidget {
             vertical: kVerticalPadding,
           ),
           child: ListView.builder(
-            itemCount: dummyCriteriaList.length,
-            itemBuilder: (context, index) =>
-                CriteriaCard(criteria: dummyCriteriaList[index]),
+            itemCount: lang == "ar"
+                ? dummyCriteriaListArabic.length
+                : dummyCriteriaListEnglish.length,
+            itemBuilder: (context, index) => CriteriaCard(
+              criteria: lang == "ar"
+                  ? dummyCriteriaListArabic[index]
+                  : dummyCriteriaListEnglish[index],
+            ),
           ),
         ),
       ),

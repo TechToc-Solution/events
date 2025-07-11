@@ -59,39 +59,27 @@ class HomePage extends StatelessWidget {
         builder: (context, tokenState) {
           if (tokenState is SuccessTokenState) {
             context.read<HomeCubit>().getHome();
-            return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: kHorizontalPadding,
-                  vertical: kVerticalPadding,
-                ),
-                child: Column(
-                  children: [
-                    BlocBuilder<HomeCubit, HomeState>(
-                      builder: (context, homeState) {
-                        if (homeState is ErrorHomeState) {
-                          return Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: CustomErrorWidget(
-                              errorMessage: homeState.msg,
-                              onRetry: () =>
-                                  context.read<HomeCubit>().getHome(),
-                            ),
-                          );
-                        } else if (homeState is SuccessHomeState) {
-                          return Expanded(
-                            child: HomePageBody(data: homeState.data),
-                          );
-                        }
-                        return Expanded(
-                          child: Center(
-                            child: const CircularProgressIndicator(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: kHorizontalPadding,
+              ),
+              child: BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, homeState) {
+                  if (homeState is ErrorHomeState) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: CustomErrorWidget(
+                        errorMessage: homeState.msg,
+                        onRetry: () => context.read<HomeCubit>().getHome(),
+                      ),
+                    );
+                  } else if (homeState is SuccessHomeState) {
+                    return Expanded(child: HomePageBody(data: homeState.data));
+                  }
+                  return Expanded(
+                    child: Center(child: const CircularProgressIndicator()),
+                  );
+                },
               ),
             );
           } else if (tokenState is ErrorTokenState) {
