@@ -75,6 +75,10 @@ class PlayerDetailsScreen extends StatelessWidget {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 20),
+                        width: double.infinity,
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.secColors,
                           borderRadius: const BorderRadius.vertical(
