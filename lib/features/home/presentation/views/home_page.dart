@@ -95,11 +95,9 @@ class HomePage extends StatelessWidget {
                       ),
                     );
                   } else if (homeState is SuccessHomeState) {
-                    return Expanded(child: HomePageBody(data: homeState.data));
+                    return HomePageBody(data: homeState.data);
                   }
-                  return Expanded(
-                    child: Center(child: const CircularProgressIndicator()),
-                  );
+                  return Center(child: const CircularProgressIndicator());
                 },
               ),
             );
