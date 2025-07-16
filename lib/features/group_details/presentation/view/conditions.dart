@@ -1,11 +1,9 @@
-import 'package:events/core/locale/locale_cubit.dart';
 import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/constats.dart';
-import 'package:events/core/utils/functions.dart';
 import 'package:events/features/group_details/data/model/criteria_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class ConditionsScreen extends StatelessWidget {
   const ConditionsScreen({super.key});
@@ -26,30 +24,7 @@ class ConditionsScreen extends StatelessWidget {
             ),
           ],
         ),
-        actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-            onPressed: () async {
-              final currentLocale = Localizations.localeOf(
-                context,
-              ).languageCode;
-              final cubit = context.read<LocaleCubit>();
-              if (currentLocale == 'en') {
-                cubit.changeLanguage('ar');
-              } else {
-                cubit.changeLanguage('en');
-              }
-              resetHomeCubits(context);
-            },
-            child: Text(
-              Localizations.localeOf(context).languageCode == "ar"
-                  ? "English"
-                  : "Arabic",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-          ),
-          const SizedBox(width: 4),
-        ],
+        
       ),
       body: SafeArea(
         child: Padding(

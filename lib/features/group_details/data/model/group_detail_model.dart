@@ -4,6 +4,7 @@ class GroupDetailModel {
   final String? sport;
   final String? country;
   final String? achievement;
+  final String? img;
 
   GroupDetailModel({
     this.id,
@@ -11,6 +12,7 @@ class GroupDetailModel {
     this.sport,
     this.country,
     this.achievement,
+    this.img,
   });
 
   factory GroupDetailModel.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class GroupDetailModel {
       sport: json['Sport'],
       country: json['Country'],
       achievement: json['Acheivement'],
+      img: json['img'],
     );
   }
 
@@ -30,6 +33,7 @@ class GroupDetailModel {
       'Sport': sport,
       'Country': country,
       'Acheivement': achievement,
+      'img': img,
     };
   }
 }

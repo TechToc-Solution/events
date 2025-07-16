@@ -1,11 +1,10 @@
-import 'package:events/core/locale/locale_cubit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:events/core/Api_services/urls.dart';
 import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/constats.dart';
-import 'package:events/core/utils/functions.dart';
 import 'package:events/features/group_details/data/model/group_detail_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlayerDetailsScreen extends StatelessWidget {
   static const String routeName = '/player_details';
@@ -28,30 +27,6 @@ class PlayerDetailsScreen extends StatelessWidget {
             ),
           ],
         ),
-        actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-            onPressed: () async {
-              final currentLocale = Localizations.localeOf(
-                context,
-              ).languageCode;
-              final cubit = context.read<LocaleCubit>();
-              if (currentLocale == 'en') {
-                cubit.changeLanguage('ar');
-              } else {
-                cubit.changeLanguage('en');
-              }
-              resetHomeCubits(context);
-            },
-            child: Text(
-              Localizations.localeOf(context).languageCode == "ar"
-                  ? "English"
-                  : "Arabic",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-          ),
-          const SizedBox(width: 4),
-        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -93,29 +68,46 @@ class PlayerDetailsScreen extends StatelessWidget {
                                 width: 85,
                                 height: 85,
                                 decoration: BoxDecoration(
-                                  color: Colors.amber,
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     color: AppColors.primaryColors,
                                     width: 2,
                                   ),
                                 ),
-                                child: Center(
-                                  child: LayoutBuilder(
-                                    builder: (context, constraints) {
-                                      final fontSize =
-                                          constraints.maxWidth /
-                                          (player.id.toString().length / 2);
-                                      return Text(
-                                        player.id.toString(),
-                                        style: TextStyle(
-                                          fontSize: fontSize.clamp(18, 26),
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
+                                child: ClipOval(
+                                  child:
+                                      (player.img == null ||
+                                          player.img!.isEmpty)
+                                      ? const Icon(
+                                          Icons.person,
+                                          size: 40,
+                                          color: Colors.grey,
+                                        )
+                                      : CachedNetworkImage(
+                                          imageUrl:
+                                              "${Urls.imgPath}${player.img}",
+                                          fit: BoxFit.cover,
+                                          progressIndicatorBuilder:
+                                              (
+                                                context,
+                                                url,
+                                                downloadProgress,
+                                              ) => Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                      color: AppColors
+                                                          .primaryColors,
+                                                      value: downloadProgress
+                                                          .progress,
+                                                    ),
+                                              ),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(
+                                                Icons.person,
+                                                size: 40,
+                                                color: Colors.grey,
+                                              ),
                                         ),
-                                      );
-                                    },
-                                  ),
                                 ),
                               ),
                               const SizedBox(height: 10),

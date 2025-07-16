@@ -6,8 +6,8 @@ class HomeData {
   HomeData({this.groups});
 
   HomeData.fromJson(Map<String, dynamic> json) {
-    text = json['text'];
-    time = DateTime.tryParse(json['time'] ?? '');
+    text = json['timers'][0]['text'];
+    time = DateTime.tryParse(json['timers'][0]['time'] ?? '');
 
     if (json['groups'] != null) {
       groups = List<GroupData>.from(
@@ -23,6 +23,8 @@ class GroupData {
   int? id;
   String? name;
   int? countSelect;
+  String? comments;
+  String? img;
 
   GroupData({this.id, this.name, this.countSelect});
 
@@ -30,6 +32,8 @@ class GroupData {
     id = json['id'];
     name = json['name'];
     countSelect = json['count_select'];
+    img = json['img'];
+    comments = json['comments'];
   }
 
   Map<String, dynamic> toJson() {
@@ -37,6 +41,8 @@ class GroupData {
     data['id'] = id;
     data['name'] = name;
     data['count_select'] = countSelect;
+    data['img'] = img;
+    data['comments'] = comments;
     return data;
   }
 }

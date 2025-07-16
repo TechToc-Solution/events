@@ -22,8 +22,8 @@ class HomeRepoIplm implements HomeRepo {
       );
       if (resp.statusCode == 200) {
         final data = resp.data;
-        if (data['timer'] != null && data['timer'].isNotEmpty) {
-          return right(HomeData.fromJson(data['timer'][0]));
+        if (data['timers'] != null && data['timers'].isNotEmpty) {
+          return right(HomeData.fromJson(data));
         } else {
           return left(ServerFailure("No timer data found."));
         }

@@ -47,11 +47,9 @@ class GroupDetailsPageBody extends StatelessWidget {
             ),
             child: LayoutBuilder(
               builder: (context, constraints) {
-                final fontSize =
-                    constraints.maxWidth /
-                    ("best_sport_personality".tr(context).length / 2);
+                final fontSize = constraints.maxWidth / (groupName.length / 2);
                 return Text(
-                  "best_sport_personality".tr(context),
+                  groupName,
                   style: TextStyle(
                     fontSize: fontSize.clamp(16, 20),
                     color: Colors.white,
@@ -125,6 +123,19 @@ class GroupDetailsPageBody extends StatelessWidget {
               } else {
                 crossAxisCount = 2;
               }
+
+              // Estimate the width of each grid item
+              double gridItemWidth =
+                  (screenWidth -
+                      (crossAxisCount - 1) * 10 -
+                      2 * (screenWidth > 600 ? 24 : 0)) /
+                  crossAxisCount;
+
+              // Adjust height dynamically: for example, make it 1.4 times the width
+              double gridItemHeight = gridItemWidth * 1.3;
+
+              double aspectRatio = gridItemWidth / gridItemHeight;
+
               return Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: screenWidth > 600 ? 24.0 : 0,
@@ -134,7 +145,7 @@ class GroupDetailsPageBody extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: crossAxisCount,
-                    childAspectRatio: 0.7,
+                    childAspectRatio: aspectRatio,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
@@ -235,7 +246,8 @@ class GroupDetailsPageBody extends StatelessWidget {
                   .selectedPlayers;
               return CustomButton(
                 onPressed: () {
-                  if (selectdPlayers.isNotEmpty) {
+                  if (selectdPlayers.isNotEmpty &&
+                      selectdPlayers.length == numOfSelection) {
                     context.read<PlayerSelectionCubit>().playerSelection(
                       PlayerSelectionParams(
                         groupId: groupId,

@@ -20,6 +20,8 @@ class Urls {
   static String selectionPersons = "SelectionPersons";
   static String selectionSubmit = "SelectionSubmit";
 
+  static String imgPath = "https://mbrawards.ae/CSA/img.ashx?rowid=";
+
   //version
   static String getVersion = "versions";
 }

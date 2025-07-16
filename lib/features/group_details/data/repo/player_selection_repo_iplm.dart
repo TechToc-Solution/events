@@ -12,16 +12,24 @@ class PlayerSelectionRepoIplm implements PlayerSelectionRepo {
 
   PlayerSelectionRepoIplm({required this.apiServices});
   @override
-  Future<Either<Failure, void>> playerSelection(PlayerSelectionParams params) async {
+  Future<Either<Failure, void>> playerSelection(
+    PlayerSelectionParams params,
+  ) async {
     try {
       var resp = await apiServices.post(
-        endPoint: "${Urls.selectionSubmit}?token=${CacheHelper.getData(key: "token")}",
-        data: {"group": params.groupId, "players": params.playerId, "note": params.notes},
+        endPoint:
+            "${Urls.selectionSubmit}?token=${CacheHelper.getData(key: "token")}",
+        data: {
+          "data":
+              "{'group': ${params.groupId},'players': ${params.playerId},'note': ${params.notes}},",
+        },
       );
       if (resp.statusCode == 200) {
         return right(null);
       }
-      return left(ServerFailure(resp.data['message'] ?? ErrorHandler.defaultMessage()));
+      return left(
+        ServerFailure(resp.data['message'] ?? ErrorHandler.defaultMessage()),
+      );
     } catch (e) {
       return left(ErrorHandler.handle(e));
     }

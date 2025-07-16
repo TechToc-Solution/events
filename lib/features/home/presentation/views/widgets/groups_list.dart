@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+
+import 'package:events/core/Api_services/urls.dart';
 import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
 import 'package:events/features/group_details/presentation/view/group_detail_page.dart';
 import 'package:events/features/home/data/model/home_model.dart';
-import 'package:flutter/material.dart';
 
 class GroupsList extends StatelessWidget {
   const GroupsList({super.key, required this.data});
@@ -74,10 +77,27 @@ class GroupsList extends StatelessWidget {
                   );
                 },
               ),
-              trailing: CircleAvatar(
-                radius: 28,
-                backgroundColor: AppColors.primaryColors,
-                child: Icon(Icons.person, size: 32, color: Colors.white),
+              trailing: Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.primaryColors, width: 2),
+                ),
+                child: ClipOval(
+                  child: CachedNetworkImage(
+                    fit: BoxFit.fill,
+                    imageUrl: "${Urls.imgPath}${data.groups?[index].img}",
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            value: downloadProgress.progress,
+                          ),
+                        ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                ),
               ),
             ),
           ),
