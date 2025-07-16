@@ -3,7 +3,6 @@ import 'package:events/core/utils/styles.dart';
 import 'package:events/features/group_details/data/model/group_detail_model.dart';
 import 'package:events/features/group_details/presentation/view/custom_button.dart';
 import 'package:events/features/group_details/presentation/view/widget/success_card.dart';
-import 'package:events/features/home/presentation/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
@@ -26,13 +25,19 @@ class SubmitedGroupSuccessPage extends StatelessWidget {
       appBar: AppBar(
         foregroundColor: Colors.white,
         backgroundColor: AppColors.primaryColors,
+        elevation: 2,
         title: Row(
           children: [
             const Icon(Icons.phone, color: Colors.white),
-            const SizedBox(width: 4),
+            const SizedBox(width: 8),
             Text(
               "contact_us".tr(context),
-              style: const TextStyle(fontFamily: "cocon-next-arabic"),
+              style: const TextStyle(
+                fontFamily: "cocon-next-arabic",
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
@@ -50,10 +55,8 @@ class SubmitedGroupSuccessPage extends StatelessWidget {
               const SizedBox(height: 16),
               CustomButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => const HomePage()),
-                  );
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                 },
                 child: Text(
                   "backe_to_category".tr(context),

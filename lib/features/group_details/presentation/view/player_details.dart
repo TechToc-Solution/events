@@ -16,14 +16,20 @@ class PlayerDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: AppColors.primaryColors,
+         backgroundColor: AppColors.primaryColors,
+        elevation: 2,
         title: Row(
           children: [
             const Icon(Icons.phone, color: Colors.white),
-            const SizedBox(width: 4),
+            const SizedBox(width: 8),
             Text(
               "contact_us".tr(context),
-              style: const TextStyle(fontFamily: "cocon-next-arabic"),
+              style: const TextStyle(
+                fontFamily: "cocon-next-arabic",
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),

@@ -19,42 +19,63 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: AppColors.primaryColors,
+        elevation: 2,
         title: Row(
           children: [
-            Icon(Icons.phone, color: Colors.white),
-            SizedBox(width: 4),
+            const Icon(Icons.phone, color: Colors.white),
+            const SizedBox(width: 8),
             Text(
               "contact_us".tr(context),
-              style: TextStyle(fontFamily: "cocon-next-arabic"),
+              style: const TextStyle(
+                fontFamily: "cocon-next-arabic",
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
         actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-            onPressed: () async {
-              final cubit = context.read<LocaleCubit>();
-              final currentLocale = cubit.currentLocale.languageCode;
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: TextButton.icon(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.primaryColors,
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+              ),
+              onPressed: () async {
+                final cubit = context.read<LocaleCubit>();
+                final currentLocale = cubit.currentLocale.languageCode;
+                final newLang = currentLocale == 'en' ? 'ar' : 'en';
 
-              final newLang = currentLocale == 'en' ? 'ar' : 'en';
-
-              await cubit.changeLanguage(newLang);
-
-              await context.read<TokenCubit>().getToken(context);
-
-              resetHomeCubits(context);
-            },
-            child: Text(
-              Localizations.localeOf(context).languageCode == "ar"
-                  ? "English"
-                  : "Arabic",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                await cubit.changeLanguage(newLang);
+                await context.read<TokenCubit>().getToken(context);
+                resetHomeCubits(context);
+              },
+              icon: const Icon(Icons.language, size: 18),
+              label: Text(
+                Localizations.localeOf(context).languageCode == "ar"
+                    ? "English"
+                    : "العربية",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+              ),
             ),
           ),
-          SizedBox(width: 4),
         ],
       ),
+
       body: BlocBuilder<TokenCubit, TokenState>(
         builder: (context, tokenState) {
           if (tokenState is SuccessTokenState) {

@@ -4,7 +4,6 @@ import 'package:events/core/utils/constats.dart';
 import 'package:events/features/group_details/data/model/criteria_model.dart';
 import 'package:flutter/material.dart';
 
-
 class ConditionsScreen extends StatelessWidget {
   const ConditionsScreen({super.key});
 
@@ -14,17 +13,22 @@ class ConditionsScreen extends StatelessWidget {
       appBar: AppBar(
         foregroundColor: Colors.white,
         backgroundColor: AppColors.primaryColors,
+        elevation: 2,
         title: Row(
           children: [
             const Icon(Icons.phone, color: Colors.white),
-            const SizedBox(width: 4),
+            const SizedBox(width: 8),
             Text(
               "contact_us".tr(context),
-              style: const TextStyle(fontFamily: "cocon-next-arabic"),
+              style: const TextStyle(
+                fontFamily: "cocon-next-arabic",
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
-        
       ),
       body: SafeArea(
         child: Padding(

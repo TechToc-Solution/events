@@ -267,7 +267,9 @@ class GroupDetailsPageBody extends StatelessWidget {
                     ? SizedBox(
                         height: 20,
                         width: 20,
-                        child: const CircularProgressIndicator(),
+                        child: const CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
                       )
                     : LayoutBuilder(
                         builder: (context, constraints) {
