@@ -22,21 +22,21 @@ class HomePage extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: AppColors.primaryColors,
         elevation: 2,
-        title: Row(
-          children: [
-            const Icon(Icons.phone, color: Colors.white),
-            const SizedBox(width: 8),
-            Text(
-              "contact_us".tr(context),
-              style: const TextStyle(
-                fontFamily: "cocon-next-arabic",
-                fontSize: 20,
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
-        ),
+        // title: Row(
+        //   children: [
+        //     const Icon(Icons.phone, color: Colors.white),
+        //     const SizedBox(width: 8),
+        //     Text(
+        //       "contact_us".tr(context),
+        //       style: const TextStyle(
+        //         fontFamily: "cocon-next-arabic",
+        //         fontSize: 20,
+        //         color: Colors.white,
+        //         fontWeight: FontWeight.w600,
+        //       ),
+        //     ),
+        //   ],
+        // ),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -44,13 +44,8 @@ class HomePage extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.primaryColors,
                 backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               ),
               onPressed: () async {
                 final cubit = context.read<LocaleCubit>();
@@ -63,13 +58,8 @@ class HomePage extends StatelessWidget {
               },
               icon: const Icon(Icons.language, size: 18),
               label: Text(
-                Localizations.localeOf(context).languageCode == "ar"
-                    ? "English"
-                    : "العربية",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                ),
+                Localizations.localeOf(context).languageCode == "ar" ? "English" : "العربية",
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
           ),
@@ -81,9 +71,7 @@ class HomePage extends StatelessWidget {
           if (tokenState is SuccessTokenState) {
             context.read<HomeCubit>().getHome();
             return Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: kHorizontalPadding,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
               child: BlocBuilder<HomeCubit, HomeState>(
                 builder: (context, homeState) {
                   if (homeState is ErrorHomeState) {
