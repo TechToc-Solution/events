@@ -16,6 +16,7 @@ class GroupsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+
       physics: NeverScrollableScrollPhysics(),
       itemCount: data.groups?.length ?? 0,
       itemBuilder: (BuildContext context, int index) {
