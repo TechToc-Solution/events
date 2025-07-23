@@ -35,12 +35,7 @@ class GroupsList extends StatelessWidget {
             padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
               boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
-                  offset: Offset(0, 4),
-                  blurRadius: 4,
-                  spreadRadius: 1,
-                ),
+                BoxShadow(color: Colors.black.withOpacity(0.25), offset: Offset(0, 4), blurRadius: 4, spreadRadius: 1),
               ],
               color: Colors.white,
               border: Border.all(color: AppColors.primaryColors, width: 2),
@@ -49,9 +44,7 @@ class GroupsList extends StatelessWidget {
             child: ListTile(
               title: LayoutBuilder(
                 builder: (context, constraints) {
-                  final fontSize =
-                      constraints.maxWidth /
-                      ((data.groups![index].name?.length ?? 2) / 2);
+                  final fontSize = constraints.maxWidth / ((data.groups![index].name?.length ?? 2) / 2);
                   return Text(
                     data.groups?[index].name ?? "",
                     style: TextStyle(
@@ -64,10 +57,7 @@ class GroupsList extends StatelessWidget {
               ),
               subtitle: LayoutBuilder(
                 builder: (context, constraints) {
-                  int charNumber =
-                      "group_hint_1".tr(context).length +
-                      1 +
-                      "group_hint_2".tr(context).length;
+                  int charNumber = "group_hint_1".tr(context).length + 1 + "group_hint_2".tr(context).length;
                   final fontSize = constraints.maxWidth / (charNumber / 2);
                   return Text(
                     "${"group_hint_1".tr(context)} ${data.groups?[index].countSelect ?? 0} ${"group_hint_2".tr(context)}",
@@ -75,28 +65,32 @@ class GroupsList extends StatelessWidget {
                   );
                 },
               ),
-              trailing: Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.primaryColors, width: 2),
-                ),
-                child: ClipOval(
-                  child: CachedNetworkImage(
-                    fit: BoxFit.fill,
-                    imageUrl: "${Urls.imgPath}${data.groups?[index].img}",
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            value: downloadProgress.progress,
-                          ),
-                        ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                ),
-              ),
+
+              trailing: data.groups?[index].img != null
+                  ? data.groups![index].img!.isNotEmpty
+                        ? Container(
+                            width: 56,
+                            height: 56,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: AppColors.primaryColors, width: 2),
+                            ),
+                            child: ClipOval(
+                              child: CachedNetworkImage(
+                                fit: BoxFit.fill,
+                                imageUrl: "${Urls.imgPath}${data.groups?[index].img}",
+                                progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    value: downloadProgress.progress,
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) => Icon(Icons.error),
+                              ),
+                            ),
+                          )
+                        : null
+                  : null,
             ),
           ),
         );
