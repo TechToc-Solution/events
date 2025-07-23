@@ -5,15 +5,9 @@ class GroupDetailModel {
   final String? country;
   final String? achievement;
   final String? img;
+  final String? notes;
 
-  GroupDetailModel({
-    this.id,
-    this.name,
-    this.sport,
-    this.country,
-    this.achievement,
-    this.img,
-  });
+  GroupDetailModel({this.id, this.name, this.sport, this.country, this.achievement, this.img, this.notes});
 
   factory GroupDetailModel.fromJson(Map<String, dynamic> json) {
     return GroupDetailModel(
@@ -23,6 +17,7 @@ class GroupDetailModel {
       country: json['Country'],
       achievement: json['Acheivement'],
       img: json['img'],
+      notes: json['notes'],
     );
   }
 
@@ -34,6 +29,7 @@ class GroupDetailModel {
       'Country': country,
       'Acheivement': achievement,
       'img': img,
+      'notes': notes,
     };
   }
 }

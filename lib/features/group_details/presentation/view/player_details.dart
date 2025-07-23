@@ -5,6 +5,7 @@ import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/constats.dart';
 import 'package:events/features/group_details/data/model/group_detail_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class PlayerDetailsScreen extends StatelessWidget {
   static const String routeName = '/player_details';
@@ -171,6 +172,36 @@ class PlayerDetailsScreen extends StatelessWidget {
                               ],
                             ),
                             Text(player.achievement ?? ""),
+                            if (player.notes != null && player.notes!.isNotEmpty) ...[
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    height: 16,
+                                    child: VerticalDivider(thickness: 4, width: 0, color: AppColors.secondaryColors),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  LayoutBuilder(
+                                    builder: (context, constraints) {
+                                      final fontSize = constraints.maxWidth / ("notesTitle".tr(context).length / 2);
+                                      return Text(
+                                        "notesTitle".tr(context),
+                                        style: TextStyle(
+                                          fontSize: fontSize.clamp(10, 14),
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primaryColors,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Html(
+                                data: player.notes,
+                                style: {"body": Style(fontSize: FontSize(16.0))},
+                              ),
+                            ],
                           ],
                         ),
                       ),
