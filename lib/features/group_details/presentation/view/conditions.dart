@@ -35,7 +35,7 @@ class ConditionsScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
           child: SingleChildScrollView(
             child: Html(
-              data: conditions + conditions + conditions,
+              data: conditions,
               style: {"body": Style(fontSize: FontSize(16.0))},
             ),
           ),
@@ -69,11 +69,7 @@ class CriteriaCard extends StatelessWidget {
           children: [
             Text(
               criteria.title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: AppColors.primaryColors,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.primaryColors),
             ),
             const SizedBox(height: 10),
             ...criteria.points.map(
@@ -83,12 +79,7 @@ class CriteriaCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("•  "),
-                    Expanded(
-                      child: Text(
-                        point,
-                        style: const TextStyle(fontSize: 15, height: 1.4),
-                      ),
-                    ),
+                    Expanded(child: Text(point, style: const TextStyle(fontSize: 15, height: 1.4))),
                   ],
                 ),
               ),
