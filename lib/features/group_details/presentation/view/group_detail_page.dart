@@ -3,17 +3,16 @@ import 'package:events/core/widgets/custom_error_widget.dart';
 import 'package:events/features/group_details/presentation/view/widget/group_detail_page_body.dart';
 import 'package:events/features/group_details/presentation/view_model/get_group_details/get_group_details_cubit.dart';
 import 'package:events/features/group_details/presentation/view_model/player_selection_cubit/player_selection_cubit.dart';
+import 'package:events/features/home/data/model/home_model.dart';
 import 'package:flutter/material.dart';
-import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/constats.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupDetailPage extends StatefulWidget {
-  const GroupDetailPage({super.key, required this.groupId, required this.numOfSelection, required this.groupName});
-  final int groupId;
-  final int numOfSelection;
-  final String groupName;
+  const GroupDetailPage({super.key, required this.group});
+  final GroupData group;
+
   @override
   State<GroupDetailPage> createState() => _GroupDetailPageState();
 }
@@ -23,8 +22,16 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => getit.get<PlayerSelectionCubit>()..setNumOfSelection(widget.numOfSelection)),
-        BlocProvider(create: (context) => getit.get<GetGroupDetailsCubit>()..getGroupDetails(widget.groupId)),
+        BlocProvider(
+          create: (context) =>
+              getit.get<PlayerSelectionCubit>()
+                ..setNumOfSelection(widget.group.countSelect ?? 0),
+        ),
+        BlocProvider(
+          create: (context) =>
+              getit.get<GetGroupDetailsCubit>()
+                ..getGroupDetails(widget.group.id ?? 0),
+        ),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -54,9 +61,7 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
               if (state is GetGroupDetailsSuccess) {
                 final groupDetails = state.groups;
                 return GroupDetailsPageBody(
-                  groupName: widget.groupName,
-                  groupId: widget.groupId,
-                  numOfSelection: widget.numOfSelection,
+                  group: widget.group,
                   groupDetails: groupDetails,
                 );
               } else if (state is GetGroupDetailsError) {
@@ -64,7 +69,9 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
                   child: CustomErrorWidget(
                     errorMessage: state.message,
                     onRetry: () {
-                      context.read<GetGroupDetailsCubit>().getGroupDetails(widget.groupId);
+                      context.read<GetGroupDetailsCubit>().getGroupDetails(
+                        widget.group.id ?? 0,
+                      );
                     },
                   ),
                 );

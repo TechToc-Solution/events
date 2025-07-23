@@ -1,4 +1,3 @@
-import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/constats.dart';
 import 'package:events/features/group_details/data/model/criteria_model.dart';

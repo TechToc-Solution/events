@@ -25,11 +25,8 @@ class GroupsList extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => GroupDetailPage(
-                  groupName: data.groups?[index].name ?? "",
-                  groupId: data.groups?[index].id ?? 0,
-                  numOfSelection: data.groups?[index].countSelect ?? 0,
-                ),
+                builder: (context) =>
+                    GroupDetailPage(group: data.groups![index]),
               ),
             );
           },

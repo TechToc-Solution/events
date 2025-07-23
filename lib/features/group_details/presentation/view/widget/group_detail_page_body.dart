@@ -8,6 +8,7 @@ import 'package:events/features/group_details/presentation/view/submited_group_s
 import 'package:events/features/group_details/presentation/view/widget/player_card.dart';
 import 'package:events/features/group_details/presentation/view/widget/selection_indicator.dart';
 import 'package:events/features/group_details/presentation/view_model/player_selection_cubit/player_selection_cubit.dart';
+import 'package:events/features/home/data/model/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
@@ -17,15 +18,11 @@ class GroupDetailsPageBody extends StatelessWidget {
   const GroupDetailsPageBody({
     super.key,
     required this.groupDetails,
-    required this.groupName,
-    required this.numOfSelection,
-    required this.groupId,
+    required this.group,
   });
 
-  final int numOfSelection;
   final List<GroupDetailModel> groupDetails;
-  final String groupName;
-  final int groupId;
+  final GroupData group;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +44,10 @@ class GroupDetailsPageBody extends StatelessWidget {
             ),
             child: LayoutBuilder(
               builder: (context, constraints) {
-                final fontSize = constraints.maxWidth / (groupName.length / 2);
+                final fontSize =
+                    constraints.maxWidth / (group.name?.length ?? 0 / 2);
                 return Text(
-                  groupName,
+                  group.name ?? "",
                   style: TextStyle(
                     fontSize: fontSize.clamp(16, 20),
                     color: Colors.white,
@@ -107,7 +105,7 @@ class GroupDetailsPageBody extends StatelessWidget {
             ),
           ),
 
-          SelectionIndicator(numOfSelection: numOfSelection),
+          SelectionIndicator(numOfSelection: group.countSelect ?? 0),
 
           LayoutBuilder(
             builder: (context, constraints) {
@@ -231,7 +229,7 @@ class GroupDetailsPageBody extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => SubmitedGroupSuccessPage(
                       groupDetails: slectedGdetail,
-                      groupName: groupName,
+                      groupName: group.name ?? "",
                     ),
                   ),
                 );
@@ -247,10 +245,10 @@ class GroupDetailsPageBody extends StatelessWidget {
               return CustomButton(
                 onPressed: () {
                   if (selectdPlayers.isNotEmpty &&
-                      selectdPlayers.length == numOfSelection) {
+                      selectdPlayers.length == group.countSelect) {
                     context.read<PlayerSelectionCubit>().playerSelection(
                       PlayerSelectionParams(
-                        groupId: groupId,
+                        groupId: group.id ?? 0,
                         playerId: selectdPlayers,
                         notes: notesController.text,
                       ),

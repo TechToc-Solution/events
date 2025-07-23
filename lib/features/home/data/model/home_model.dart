@@ -25,14 +25,21 @@ class GroupData {
   int? countSelect;
   String? comments;
   String? img;
-
-  GroupData({this.id, this.name, this.countSelect});
+  String? notes;
+  GroupData({
+    this.id,
+    this.name,
+    this.countSelect,
+    this.img,
+    this.comments,
+    this.notes,
+  });
 
   GroupData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     countSelect = json['count_select'];
-    img = json['img'];
+    if (json['img'] != null) img = json['img'];
     comments = json['comments'];
   }
 
