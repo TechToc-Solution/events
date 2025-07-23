@@ -2,10 +2,11 @@ import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/constats.dart';
 import 'package:events/features/group_details/data/model/criteria_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class ConditionsScreen extends StatelessWidget {
-  const ConditionsScreen({super.key});
-
+  const ConditionsScreen({super.key, required this.conditions});
+  final String conditions;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,12 +32,18 @@ class ConditionsScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding, vertical: kVerticalPadding),
-          child: ListView.builder(
-            itemCount: lang == "ar" ? dummyCriteriaListArabic.length : dummyCriteriaListEnglish.length,
-            itemBuilder: (context, index) =>
-                CriteriaCard(criteria: lang == "ar" ? dummyCriteriaListArabic[index] : dummyCriteriaListEnglish[index]),
+          padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+          child: SingleChildScrollView(
+            child: Html(
+              data: conditions + conditions + conditions,
+              style: {"body": Style(fontSize: FontSize(16.0))},
+            ),
           ),
+          // child: ListView.builder(
+          //   itemCount: lang == "ar" ? dummyCriteriaListArabic.length : dummyCriteriaListEnglish.length,
+          //   itemBuilder: (context, index) =>
+          //       CriteriaCard(criteria: lang == "ar" ? dummyCriteriaListArabic[index] : dummyCriteriaListEnglish[index]),
+          // ),
         ),
       ),
     );
@@ -62,7 +69,11 @@ class CriteriaCard extends StatelessWidget {
           children: [
             Text(
               criteria.title,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.primaryColors),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: AppColors.primaryColors,
+              ),
             ),
             const SizedBox(height: 10),
             ...criteria.points.map(
@@ -72,7 +83,12 @@ class CriteriaCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("•  "),
-                    Expanded(child: Text(point, style: const TextStyle(fontSize: 15, height: 1.4))),
+                    Expanded(
+                      child: Text(
+                        point,
+                        style: const TextStyle(fontSize: 15, height: 1.4),
+                      ),
+                    ),
                   ],
                 ),
               ),

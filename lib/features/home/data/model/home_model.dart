@@ -40,6 +40,7 @@ class GroupData {
     name = json['name'];
     countSelect = json['count_select'];
     if (json['img'] != null) img = json['img'];
+    notes = json['notes'];
     comments = json['comments'];
   }
 
@@ -49,6 +50,7 @@ class GroupData {
     data['name'] = name;
     data['count_select'] = countSelect;
     data['img'] = img;
+    data['notes'] = notes;
     data['comments'] = comments;
     return data;
   }

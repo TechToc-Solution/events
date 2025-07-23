@@ -4,7 +4,6 @@ import 'package:events/core/errors/failuer.dart';
 import 'package:events/core/shared/repos/token_repo/token_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 part 'token_state.dart';
 

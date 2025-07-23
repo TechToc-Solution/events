@@ -57,12 +57,15 @@ class GroupDetailsPageBody extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(height: 16),
+
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ConditionsScreen()),
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ConditionsScreen(conditions: group.notes ?? ""),
+                ),
               );
             },
             child: Container(

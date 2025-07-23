@@ -37,14 +37,19 @@ class PlayerDetailsScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding, vertical: kVerticalPadding),
+          padding: const EdgeInsets.symmetric(
+            horizontal: kHorizontalPadding,
+            vertical: kVerticalPadding,
+          ),
           child: SingleChildScrollView(
             child: Center(
               child: Card(
                 elevation: 4,
                 margin: const EdgeInsets.all(8),
                 color: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -53,10 +58,14 @@ class PlayerDetailsScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         width: double.infinity,
-                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.secColors,
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(16),
+                          ),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -67,51 +76,88 @@ class PlayerDetailsScreen extends StatelessWidget {
                                 height: 85,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: AppColors.primaryColors, width: 2),
+                                  border: Border.all(
+                                    color: AppColors.primaryColors,
+                                    width: 2,
+                                  ),
                                 ),
                                 child: ClipOval(
-                                  child: (player.img == null || player.img!.isEmpty)
-                                      ? const Icon(Icons.person, size: 40, color: Colors.grey)
+                                  child:
+                                      (player.img == null ||
+                                          player.img!.isEmpty)
+                                      ? const Icon(
+                                          Icons.person,
+                                          size: 40,
+                                          color: Colors.grey,
+                                        )
                                       : CachedNetworkImage(
-                                          imageUrl: "${Urls.imgPath}${player.img}",
+                                          imageUrl:
+                                              "${Urls.imgPath}${player.img}",
                                           fit: BoxFit.cover,
-                                          progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                                            child: CircularProgressIndicator(
-                                              color: AppColors.primaryColors,
-                                              value: downloadProgress.progress,
-                                            ),
-                                          ),
+                                          progressIndicatorBuilder:
+                                              (
+                                                context,
+                                                url,
+                                                downloadProgress,
+                                              ) => Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                      color: AppColors
+                                                          .primaryColors,
+                                                      value: downloadProgress
+                                                          .progress,
+                                                    ),
+                                              ),
                                           errorWidget: (context, url, error) =>
-                                              const Icon(Icons.person, size: 40, color: Colors.grey),
+                                              const Icon(
+                                                Icons.person,
+                                                size: 40,
+                                                color: Colors.grey,
+                                              ),
                                         ),
                                 ),
                               ),
                               const SizedBox(height: 10),
                               LayoutBuilder(
                                 builder: (context, constraints) {
-                                  final fontSize = constraints.maxWidth / ((player.name?.length ?? 2) / 2);
+                                  final fontSize =
+                                      constraints.maxWidth /
+                                      ((player.name?.length ?? 2) / 2);
                                   return Text(
                                     player.name ?? "",
-                                    style: TextStyle(fontSize: fontSize.clamp(16, 20), fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                      fontSize: fontSize.clamp(16, 20),
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   );
                                 },
                               ),
                               LayoutBuilder(
                                 builder: (context, constraints) {
-                                  final fontSize = constraints.maxWidth / (player.sport.toString().length / 2);
+                                  final fontSize =
+                                      constraints.maxWidth /
+                                      (player.sport.toString().length / 2);
                                   return Text(
                                     player.sport.toString(),
-                                    style: TextStyle(fontSize: fontSize.clamp(10, 14), color: Colors.grey),
+                                    style: TextStyle(
+                                      fontSize: fontSize.clamp(10, 14),
+                                      color: Colors.grey,
+                                    ),
                                   );
                                 },
                               ),
                               const SizedBox(height: 4),
                               LayoutBuilder(
                                 builder: (context, constraints) {
-                                  final fontSize = constraints.maxWidth / (player.country.toString().length / 2);
+                                  final fontSize =
+                                      constraints.maxWidth /
+                                      (player.country.toString().length / 2);
                                   return Text(
                                     player.country.toString(),
-                                    style: TextStyle(fontSize: fontSize.clamp(8, 12), color: Colors.grey),
+                                    style: TextStyle(
+                                      fontSize: fontSize.clamp(8, 12),
+                                      color: Colors.grey,
+                                    ),
                                   );
                                 },
                               ),
@@ -124,66 +170,73 @@ class PlayerDetailsScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  height: 16,
-                                  child: VerticalDivider(thickness: 4, width: 0, color: AppColors.secondaryColors),
-                                ),
-                                SizedBox(width: 8),
-                                LayoutBuilder(
-                                  builder: (context, constraints) {
-                                    final fontSize = constraints.maxWidth / ("aboutTitle".tr(context).length / 2);
-                                    return Text(
-                                      "aboutTitle".tr(context),
-                                      style: TextStyle(
-                                        fontSize: fontSize.clamp(10, 14),
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.primaryColors,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                            Text("-"),
-                            const SizedBox(height: 10),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  height: 16,
-                                  child: VerticalDivider(thickness: 4, width: 0, color: AppColors.secondaryColors),
-                                ),
-                                SizedBox(width: 8),
-                                LayoutBuilder(
-                                  builder: (context, constraints) {
-                                    final fontSize =
-                                        constraints.maxWidth / ("achievementsTitle".tr(context).length / 2);
-                                    return Text(
-                                      "achievementsTitle".tr(context),
-                                      style: TextStyle(
-                                        fontSize: fontSize.clamp(10, 14),
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.primaryColors,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                            Text(player.achievement ?? ""),
-                            if (player.notes != null && player.notes!.isNotEmpty) ...[
+                            // Row(
+                            //   children: [
+                            //     SizedBox(
+                            //       height: 16,
+                            //       child: VerticalDivider(thickness: 4, width: 0, color: AppColors.secondaryColors),
+                            //     ),
+                            //     SizedBox(width: 8),
+                            //     LayoutBuilder(
+                            //       builder: (context, constraints) {
+                            //         final fontSize = constraints.maxWidth / ("aboutTitle".tr(context).length / 2);
+                            //         return Text(
+                            //           "aboutTitle".tr(context),
+                            //           style: TextStyle(
+                            //             fontSize: fontSize.clamp(10, 14),
+                            //             fontWeight: FontWeight.bold,
+                            //             color: AppColors.primaryColors,
+                            //           ),
+                            //         );
+                            //       },
+                            //     ),
+                            //   ],
+                            // ),
+                            // Text("-"),
+                            // const SizedBox(height: 10),
+                            // Row(
+                            //   children: [
+                            //     SizedBox(
+                            //       height: 16,
+                            //       child: VerticalDivider(thickness: 4, width: 0, color: AppColors.secondaryColors),
+                            //     ),
+                            //     SizedBox(width: 8),
+                            //     LayoutBuilder(
+                            //       builder: (context, constraints) {
+                            //         final fontSize =
+                            //             constraints.maxWidth / ("achievementsTitle".tr(context).length / 2);
+                            //         return Text(
+                            //           "achievementsTitle".tr(context),
+                            //           style: TextStyle(
+                            //             fontSize: fontSize.clamp(10, 14),
+                            //             fontWeight: FontWeight.bold,
+                            //             color: AppColors.primaryColors,
+                            //           ),
+                            //         );
+                            //       },
+                            //     ),
+                            //   ],
+                            // ),
+                            // Text(player.achievement ?? ""),
+                            if (player.notes != null &&
+                                player.notes!.isNotEmpty) ...[
                               const SizedBox(height: 10),
                               Row(
                                 children: [
                                   SizedBox(
                                     height: 16,
-                                    child: VerticalDivider(thickness: 4, width: 0, color: AppColors.secondaryColors),
+                                    child: VerticalDivider(
+                                      thickness: 4,
+                                      width: 0,
+                                      color: AppColors.secondaryColors,
+                                    ),
                                   ),
                                   const SizedBox(width: 8),
                                   LayoutBuilder(
                                     builder: (context, constraints) {
-                                      final fontSize = constraints.maxWidth / ("notesTitle".tr(context).length / 2);
+                                      final fontSize =
+                                          constraints.maxWidth /
+                                          ("notesTitle".tr(context).length / 2);
                                       return Text(
                                         "notesTitle".tr(context),
                                         style: TextStyle(
@@ -199,7 +252,9 @@ class PlayerDetailsScreen extends StatelessWidget {
                               const SizedBox(height: 8),
                               Html(
                                 data: player.notes,
-                                style: {"body": Style(fontSize: FontSize(16.0))},
+                                style: {
+                                  "body": Style(fontSize: FontSize(16.0)),
+                                },
                               ),
                             ],
                           ],

@@ -1,6 +1,5 @@
 import 'package:events/core/locale/locale_cubit.dart';
 import 'package:events/core/shared/cubits/token/token_cubit.dart';
-import 'package:events/core/utils/app_localizations.dart';
 import 'package:events/core/utils/colors.dart';
 import 'package:events/core/utils/constats.dart';
 import 'package:events/core/utils/functions.dart';
